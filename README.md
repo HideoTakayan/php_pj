@@ -1,2 +1,2 @@
-# Hotel-Management
+# PHP project
 skibidi php
