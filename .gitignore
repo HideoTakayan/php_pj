@@ -17,3 +17,12 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# Credential files - DO NOT COMMIT
+AIVEN_CREDENTIALS.md
+*_CREDENTIALS.md
+*.pem
+*.key
+*.crt
+ca-certificate.crt
+
