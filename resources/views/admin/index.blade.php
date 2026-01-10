@@ -15,7 +15,7 @@
                                         <i class="icon-shopping-bag"></i>
                                     </div>
                                     <div>
-                                        <div class="body-text mb-2">Total Orders</div>
+                                        <div class="body-text mb-2">Tổng đơn hàng</div>
                                         <h4>3</h4>
                                     </div>
                                 </div>
@@ -30,7 +30,7 @@
                                         <i class="icon-dollar-sign"></i>
                                     </div>
                                     <div>
-                                        <div class="body-text mb-2">Total Amount</div>
+                                        <div class="body-text mb-2">Tổng doanh thu</div>
                                         <h4>481.34</h4>
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
                                         <i class="icon-shopping-bag"></i>
                                     </div>
                                     <div>
-                                        <div class="body-text mb-2">Pending Orders</div>
+                                        <div class="body-text mb-2">Đơn chờ xử lý</div>
                                         <h4>3</h4>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                         <i class="icon-dollar-sign"></i>
                                     </div>
                                     <div>
-                                        <div class="body-text mb-2">Pending Orders Amount</div>
+                                        <div class="body-text mb-2">Doanh thu chờ xử lý</div>
                                         <h4>481.34</h4>
                                     </div>
                                 </div>
@@ -78,7 +78,7 @@
                                         <i class="icon-shopping-bag"></i>
                                     </div>
                                     <div>
-                                        <div class="body-text mb-2">Delivered Orders</div>
+                                        <div class="body-text mb-2">Đơn đã giao</div>
                                         <h4>0</h4>
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@
                                         <i class="icon-dollar-sign"></i>
                                     </div>
                                     <div>
-                                        <div class="body-text mb-2">Delivered Orders Amount</div>
+                                        <div class="body-text mb-2">Doanh thu đã giao</div>
                                         <h4>0.00</h4>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
                                         <i class="icon-shopping-bag"></i>
                                     </div>
                                     <div>
-                                        <div class="body-text mb-2">Canceled Orders</div>
+                                        <div class="body-text mb-2">Đơn đã hủy</div>
                                         <h4>0</h4>
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@
                                         <i class="icon-dollar-sign"></i>
                                     </div>
                                     <div>
-                                        <div class="body-text mb-2">Canceled Orders Amount</div>
+                                        <div class="body-text mb-2">Doanh thu đã hủy</div>
                                         <h4>0.00</h4>
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@
 
                 <div class="wg-box">
                     <div class="flex items-center justify-between">
-                        <h5>Earnings revenue</h5>
+                        <h5>Biểu đồ doanh thu</h5>
                         <div class="dropdown default">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
@@ -144,10 +144,10 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a href="javascript:void(0);">This Week</a>
+                                    <a href="javascript:void(0);">Tuần này</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);">Last Week</a>
+                                    <a href="javascript:void(0);">Tuần trước</a>
                                 </li>
                             </ul>
                         </div>
@@ -157,7 +157,7 @@
                             <div class="mb-2">
                                 <div class="block-legend">
                                     <div class="dot t1"></div>
-                                    <div class="text-tiny">Revenue</div>
+                                    <div class="text-tiny">Doanh thu</div>
                                 </div>
                             </div>
                             <div class="flex items-center gap10">
@@ -172,7 +172,7 @@
                             <div class="mb-2">
                                 <div class="block-legend">
                                     <div class="dot t2"></div>
-                                    <div class="text-tiny">Order</div>
+                                    <div class="text-tiny">Đơn hàng</div>
                                 </div>
                             </div>
                             <div class="flex items-center gap10">
@@ -192,10 +192,10 @@
 
                 <div class="wg-box">
                     <div class="flex items-center justify-between">
-                        <h5>Recent orders</h5>
+                        <h5>Đơn hàng gần đây</h5>
                         <div class="dropdown default">
                             <a class="btn btn-secondary dropdown-toggle" href="#">
-                                <span class="view-all">View all</span>
+                                <span class="view-all">Xem tất cả</span>
                             </a>
                         </div>
                     </div>
@@ -204,17 +204,17 @@
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th style="width: 80px">OrderNo</th>
-                                        <th>Name</th>
-                                        <th class="text-center">Phone</th>
-                                        <th class="text-center">Subtotal</th>
-                                        <th class="text-center">Tax</th>
-                                        <th class="text-center">Total</th>
+                                        <th style="width: 80px">Mã ĐH</th>
+                                        <th>Tên</th>
+                                        <th class="text-center">SĐT</th>
+                                        <th class="text-center">Tạm tính</th>
+                                        <th class="text-center">Thuế</th>
+                                        <th class="text-center">Tổng cộng</th>
 
-                                        <th class="text-center">Status</th>
-                                        <th class="text-center">Order Date</th>
-                                        <th class="text-center">Total Items</th>
-                                        <th class="text-center">Delivered On</th>
+                                        <th class="text-center">Trạng thái</th>
+                                        <th class="text-center">Ngày đặt</th>
+                                        <th class="text-center">Số lượng</th>
+                                        <th class="text-center">Ngày giao</th>
                                         <th></th>
                                     </tr>
                                 </thead>

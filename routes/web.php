@@ -38,6 +38,11 @@ Route::get('/shop/{slug}', [ShopController::class, 'product_detail'])->name('pro
 Route::get('/posts', [UserBaiVietController::class, 'index'])->name('post.index');
 Route::get('/post/{slug}', [UserBaiVietController::class, 'post_detail'])->name('post.detail');
 
+// Static pages
+Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about.index');
+Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact.index');
+Route::post('/contact', [App\Http\Controllers\HomeController::class, 'postContact'])->name('client.postContact');
+
 // cart
 Route::get('/list-cart', [CartController::class, 'listCart'])->name('cart.list');
 Route::post('/add-to-cart', [CartController::class, 'addCart'])->name('cart.add');
@@ -55,7 +60,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/don-hang/store', [DonHangController::class, 'store'])->name('donhangs.store');
     Route::get('/don-hang/show/{id}', [DonHangController::class, 'show'])->name('donhangs.show');
     Route::put('/don-hang/update/{id}', [DonHangController::class, 'update'])->name('donhangs.update');
-
+    
+    // Coupon actions
+    Route::post('/don-hang/coupon/apply', [DonHangController::class, 'applyCoupon'])->name('donhangs.coupon.apply');
+    Route::get('/don-hang/coupon/remove', [DonHangController::class, 'removeCoupon'])->name('donhangs.coupon.remove');
+    
+    // Re-order
+    Route::post('/don-hang/reorder/{id}', [DonHangController::class, 'reorder'])->name('donhangs.reorder');
 
 });
 
@@ -64,6 +75,14 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::resource('admin/danh_mucs', DanhMucController::class);
     Route::resource('admin/san_phams', SanPhamController::class);
     Route::resource('admin/bai_viets', BaiVietController::class);
+    
+    // Admin Order Routes
+    Route::get('/admin/orders', [\App\Http\Controllers\Admin\DonHangController::class, 'index'])->name('admin.orders.index');
+    Route::get('/admin/orders/{id}', [\App\Http\Controllers\Admin\DonHangController::class, 'show'])->name('admin.orders.show');
+    Route::put('/admin/orders/{id}', [\App\Http\Controllers\Admin\DonHangController::class, 'update'])->name('admin.orders.update');
+
+    // Admin Coupon Routes
+    Route::resource('admin/coupons', \App\Http\Controllers\Admin\CouponController::class)->names('admin.coupons');
 });
 
 // profile, post, product reviews

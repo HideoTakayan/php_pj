@@ -13,7 +13,7 @@
                         <em>Quản lý danh sách sản phẩm</em>
                     </span>
                 </a>
-                <a href="checkout.html" class="checkout-steps__item active">
+                <a href="#" class="checkout-steps__item active">
                     <span class="checkout-steps__item-number">02</span>
                     <span class="checkout-steps__item-title">
                         <span>Vận chuyển và Thanh toán</span>
@@ -132,6 +132,15 @@
                                                 <input type="hidden" name="tien_ship" value="{{ $shipping }}">
                                             </td>
                                         </tr>
+                                        @if(isset($discount) && $discount > 0)
+                                        <tr>
+                                            <th class="text-success">GIẢM GIÁ ({{ $couponCode }})</th>
+                                            <td align="right" class="text-success">
+                                                -${{ number_format($discount) }}
+                                                <input type="hidden" name="tien_giam_gia" value="{{ $discount }}">
+                                            </td>
+                                        </tr>
+                                        @endif
                                         <tr>
                                             <th>TỔNG CỘNG</th>
                                             <td align="right" class="text-red">
@@ -141,23 +150,78 @@
                                         </tr>
                                     </tbody>
                                 </table>
+
+                                @if(!session()->has('coupon'))
+                                <div class="mt-3">
+                                    <div class="input-group">
+                                        <input type="text" id="coupon_code_input" class="form-control" placeholder="Nhập mã giảm giá">
+                                        <button class="btn btn-dark" type="button" id="apply_coupon_btn">Áp dụng</button>
+                                    </div>
+                                </div>
+                                <form id="coupon_form" action="{{ route('donhangs.coupon.apply') }}" method="POST" style="display: none;">
+                                    @csrf
+                                    <input type="hidden" name="coupon_code" id="hidden_coupon_code">
+                                </form>
+                                @else
+                                <div class="mt-3">
+                                    <div class="alert alert-success d-flex justify-content-between align-items-center p-2">
+                                        <small>Mã <strong>{{ session('coupon.code') }}</strong> đang được áp dụng.</small>
+                                        <a href="{{ route('donhangs.coupon.remove') }}" class="text-danger fw-bold text-xs">Gỡ bỏ</a>
+                                    </div>
+                                </div>
+                                @endif
+                                
                             </div>
                             <div class="checkout__payment-methods">
-                                <div class="form-check">
-                                    <input class="form-check-input form-check-input_fill" type="radio"
-                                        name="trang_thai_thanh_toan" id="checkout_payment_method_3" checked>
-                                    <label class="form-check-label" for="checkout_payment_method_3" >
-                                        Thanh toán khi nhận hàng
-                                        <p class="option-detail">
-                                            Thanh toán bằng tiền mặt khi giao hàng.
-                                        </p>
-                                    </label>
+                                <div class="payment-options">
+                                    <div class="payment-option mb-3">
+                                        <div class="form-check p-3 border rounded shadow-sm">
+                                            <input class="form-check-input" type="radio" value="COD" name="phuong_thuc_thanh_toan" id="payment_cod" checked>
+                                            <label class="form-check-label w-100 cursor-pointer ps-2" for="payment_cod">
+                                                <span class="fw-bold text-dark">Thanh toán khi nhận hàng (COD)</span>
+                                                <small class="d-block text-muted mt-1">Thanh toán bằng tiền mặt khi giao hàng.</small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="payment-option mb-3">
+                                        <div class="form-check p-3 border rounded shadow-sm">
+                                            <input class="form-check-input" type="radio" value="Banking" name="phuong_thuc_thanh_toan" id="payment_banking">
+                                            <label class="form-check-label w-100 cursor-pointer ps-2" for="payment_banking">
+                                                <span class="fw-bold text-dark">Chuyển khoản ngân hàng (VNPAY/Momo)</span>
+                                                <small class="d-block text-muted mt-1">Thanh toán qua tài khoản ngân hàng hoặc ví điện tử.</small>
+                                            </label>
+                                        </div>
+                                        
+                                        <div id="banking-info" class="mt-2 p-3 border rounded bg-white shadow-sm" style="display: none;">
+                                            <p class="mb-2 fw-bold text-dark border-bottom pb-2">THÔNG TIN CHUYỂN KHOẢN</p>
+                                            <div class="row align-items-center">
+                                                <div class="col-md-7">
+                                                    <ul class="list-unstyled mb-0 text-dark" style="font-size: 0.95rem; line-height: 1.8;">
+                                                        <li>Ngân hàng: <strong class="text-primary">MB Bank</strong></li>
+                                                        <li>Số tài khoản: <strong class="text-primary fs-5">9999999999</strong></li>
+                                                        <li>Chủ tài khoản: <strong>UOMO SHOP</strong></li>
+                                                        <li>Nội dung: <strong>[Tên] + [SĐT]</strong></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-5 text-center border-start">
+                                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=00020101021138570010A0000007270127000697042501130099999999990208QRIBFTTA53037045802VN630456C8" alt="QR Code" class="img-fluid border p-1 bg-white rounded" style="max-width: 120px;">
+                                                    <p class="mt-1 small text-muted fst-italic">Quét mã để thanh toán nhanh</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="policy-text">
                                     Dữ liệu cá nhân của bạn sẽ được sử dụng để xử lý đơn hàng, hỗ trợ trải nghiệm của bạn trên trang web và cho các mục đích khác được mô tả trong <a href="terms.html"
                                         target="_blank">chính sách bảo mật</a>.
                                 </div>
                             </div>
+                            @if(isset($selectedIds) && count($selectedIds) > 0)
+                                @foreach($selectedIds as $id)
+                                    <input type="hidden" name="selected_products[]" value="{{ $id }}">
+                                @endforeach
+                            @endif
                             <button type="submit" class="btn btn-primary btn-checkout">ĐẶT HÀNG</button>
                         </div>
                     </div>
@@ -165,4 +229,26 @@
             </form>
         </section>
     </main>
+
+    @section('js')
+    <script>
+        $(document).ready(function() {
+            $('input[name="phuong_thuc_thanh_toan"]').change(function() {
+                if ($(this).val() === 'Banking') {
+                    $('#banking-info').slideDown();
+                } else {
+                    $('#banking-info').slideUp();
+                }
+            });
+
+            $('#apply_coupon_btn').click(function() {
+                var code = $('#coupon_code_input').val();
+                if(code.trim() !== '') {
+                    $('#hidden_coupon_code').val(code);
+                    $('#coupon_form').submit();
+                }
+            });
+        });
+    </script>
+    @endsection
 @endsection

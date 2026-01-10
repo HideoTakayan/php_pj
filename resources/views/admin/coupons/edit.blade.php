@@ -1,0 +1,45 @@
+@extends('layouts.admin')
+
+@section('content')
+<div class="row">
+    <div class="col-12">
+        <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                    <h6 class="text-white text-capitalize ps-3">Sửa mã giảm giá</h6>
+                </div>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('admin.coupons.update', $coupon->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="mb-3">
+                        <label class="form-label">Mã Code</label>
+                        <input type="text" name="code" class="form-control border px-2" value="{{ old('code', $coupon->code) }}" required>
+                        @error('code') <div class="text-danger text-xs">{{ $message }}</div> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Loại giảm giá</label>
+                        <select name="type" class="form-control border px-2">
+                            <option value="percent" {{ $coupon->type == 'percent' ? 'selected' : '' }}>Phần trăm (%)</option>
+                            <option value="fixed" {{ $coupon->type == 'fixed' ? 'selected' : '' }}>Số tiền cố định</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Giá trị</label>
+                        <input type="number" name="value" class="form-control border px-2" value="{{ old('value', $coupon->value) }}" required min="0">
+                        @error('value') <div class="text-danger text-xs">{{ $message }}</div> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ngày hết hạn</label>
+                        <input type="date" name="expiry_date" class="form-control border px-2 border-radius-lg" value="{{ old('expiry_date', $coupon->expiry_date ? $coupon->expiry_date->format('Y-m-d') : '') }}">
+                        @error('expiry_date') <div class="text-danger text-xs">{{ $message }}</div> @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    <a href="{{ route('admin.coupons.index') }}" class="btn btn-secondary">Hủy</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

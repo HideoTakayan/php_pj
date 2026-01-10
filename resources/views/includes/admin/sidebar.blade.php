@@ -10,7 +10,7 @@
 
             <div class="section-menu-left">
                 <div class="box-logo">
-                    <a href="index.html" id="site-logo-inner">
+                    <a href="{{ route('home.index') }}" id="site-logo-inner">
                         <img class="w-75" id="logo" alt=""
                             src="{{ asset('assets/admins/images/logo/logo3.png') }}"
                             data-light="{{ asset('assets/admins/images/logo/logo3.png') }}"
@@ -22,12 +22,12 @@
                 </div>
                 <div class="center">
                     <div class="center-item">
-                        <div class="center-heading">Main Home</div>
+                        <div class="center-heading">Trang chủ</div>
                         <ul class="menu-list">
                             <li class="menu-item">
-                                <a href="index.html" class="">
+                                <a href="{{ route('admin.index') }}" class="">
                                     <div class="icon"><i class="icon-grid"></i></div>
-                                    <div class="text">Dashboard</div>
+                                    <div class="text">Bảng điều khiển</div>
                                 </a>
                             </li>
                         </ul>
@@ -37,17 +37,17 @@
                             <li class="menu-item has-children">
                                 <a href="javascript:void(0);" class="menu-item-button">
                                     <div class="icon"><i class="icon-shopping-cart"></i></div>
-                                    <div class="text">Products</div>
+                                    <div class="text">Sản phẩm</div>
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="sub-menu-item">
                                         <a href="{{ route('san_phams.create') }}" class="">
-                                            <div class="text">Add Product</div>
+                                            <div class="text">Thêm sản phẩm</div>
                                         </a>
                                     </li>
                                     <li class="sub-menu-item">
                                         <a href="{{ route('san_phams.index') }}" class="">
-                                            <div class="text">Products</div>
+                                            <div class="text">Danh sách sản phẩm</div>
                                         </a>
                                     </li>
                                 </ul>
@@ -73,17 +73,17 @@
                             <li class="menu-item has-children">
                                 <a href="javascript:void(0);" class="menu-item-button">
                                     <div class="icon"><i class="icon-layers"></i></div>
-                                    <div class="text">Category</div>
+                                    <div class="text">Danh mục</div>
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="sub-menu-item">
                                         <a href="{{ route('danh_mucs.create') }}" class="">
-                                            <div class="text">New Category</div>
+                                            <div class="text">Thêm danh mục</div>
                                         </a>
                                     </li>
                                     <li class="sub-menu-item">
                                         <a href="{{ route('danh_mucs.index') }}" class="">
-                                            <div class="text">Categories</div>
+                                            <div class="text">Danh sách danh mục</div>
                                         </a>
                                     </li>
                                 </ul>
@@ -92,17 +92,17 @@
                             <li class="menu-item has-children">
                                 <a href="javascript:void(0);" class="menu-item-button">
                                     <div class="icon"><i class="icon-file-plus"></i></div>
-                                    <div class="text">Order</div>
+                                    <div class="text">Đơn hàng</div>
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="sub-menu-item">
-                                        <a href="orders.html" class="">
-                                            <div class="text">Orders</div>
+                                        <a href="{{ route('admin.orders.index') }}" class="">
+                                            <div class="text">Danh sách đơn hàng</div>
                                         </a>
                                     </li>
                                     <li class="sub-menu-item">
                                         <a href="order-tracking.html" class="">
-                                            <div class="text">Order tracking</div>
+                                            <div class="text">Theo dõi đơn hàng</div>
                                         </a>
                                     </li>
                                 </ul>
@@ -111,17 +111,17 @@
                             <li class="menu-item has-children">
                                 <a href="javascript:void(0);" class="menu-item-button">
                                     <div class="icon"><i class="icon-layers"></i></div>
-                                    <div class="text">Post</div>
+                                    <div class="text">Bài viết</div>
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="sub-menu-item">
                                         <a href="{{ route('bai_viets.create') }}" class="">
-                                            <div class="text">New Post</div>
+                                            <div class="text">Thêm bài viết</div>
                                         </a>
                                     </li>
                                     <li class="sub-menu-item">
                                         <a href="{{ route('bai_viets.index') }}" class="">
-                                            <div class="text">Post</div>
+                                            <div class="text">Danh sách bài viết</div>
                                         </a>
                                     </li>
                                 </ul>
@@ -129,27 +129,27 @@
                             <li class="menu-item">
                                 <a href="slider.html" class="">
                                     <div class="icon"><i class="icon-image"></i></div>
-                                    <div class="text">Slider</div>
+                                    <div class="text">Quản lý Slider</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="coupons.html" class="">
+                                <a href="{{ route('admin.coupons.index') }}" class="">
                                     <div class="icon"><i class="icon-grid"></i></div>
-                                    <div class="text">Coupons</div>
+                                    <div class="text">Mã giảm giá</div>
                                 </a>
                             </li>
 
                             <li class="menu-item">
                                 <a href="users.html" class="">
                                     <div class="icon"><i class="icon-user"></i></div>
-                                    <div class="text">User</div>
+                                    <div class="text">Người dùng</div>
                                 </a>
                             </li>
 
                             <li class="menu-item">
                                 <a href="settings.html" class="">
                                     <div class="icon"><i class="icon-settings"></i></div>
-                                    <div class="text">Settings</div>
+                                    <div class="text">Cài đặt</div>
                                 </a>
                             </li>
 
@@ -160,7 +160,7 @@
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit()"
                                         class="">
                                         <div class="icon"><i class="icon-log-out"></i></div>
-                                        <div class="text">Logout</div>
+                                        <div class="text">Đăng xuất</div>
                                     </a>
                                 </form>
                             </li>

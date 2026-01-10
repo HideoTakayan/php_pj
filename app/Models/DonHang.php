@@ -42,8 +42,10 @@ class DonHang extends Model
         'ghi_chu',
         'trang_thai_don_hang',
         'trang_thai_thanh_toan',
+        'phuong_thuc_thanh_toan',
         'tien_hang',
         'tien_ship',
+        'tien_giam_gia',
         'tong_tien',
     ];
 

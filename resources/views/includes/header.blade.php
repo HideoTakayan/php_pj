@@ -293,13 +293,13 @@
                         <a href="{{ route('shop.index') }}" class="navigation__link">Cửa hàng</a>
                     </li>
                     <li class="navigation__item">
-                        <a href="cart.html" class="navigation__link">Giỏ hàng</a>
+                        <a href="{{ route('cart.list') }}" class="navigation__link">Giỏ hàng</a>
                     </li>
                     <li class="navigation__item">
-                        <a href="about.html" class="navigation__link">Giới thiệu</a>
+                        <a href="{{ route('about.index') }}" class="navigation__link">Giới thiệu</a>
                     </li>
                     <li class="navigation__item">
-                        <a href="contact.html" class="navigation__link">Liên hệ</a>
+                        <a href="{{ route('contact.index') }}" class="navigation__link">Liên hệ</a>
                     </li>
                 </ul>
             </div>
@@ -382,10 +382,10 @@
                         <a href="{{ route('shop.index') }}" class="navigation__link">Cửa hàng</a>
                     </li>
                     <li class="navigation__item">
-                        <a href="about.html" class="navigation__link">Giới thiệu</a>
+                        <a href="{{ route('about.index') }}" class="navigation__link">Giới thiệu</a>
                     </li>
                     <li class="navigation__item">
-                        <a href="contact.html" class="navigation__link">Liên hệ</a>
+                        <a href="{{ route('contact.index') }}" class="navigation__link">Liên hệ</a>
                     </li>
                     <li class="navigation__item">
                         <a href="{{ route('post.index') }}" class="navigation__link">Bài viết </a>
@@ -468,14 +468,28 @@
                         </a>
                     </div>
                 @else
-                    <a href="{{ Auth::user()->utype == 'admin' ? route('admin.index') : route('user.index') }}"
-                        class="header-tools__item">
-                        <span class="mx-2">{{ Auth::user()->name }}</span>
-                        <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <use href="#icon_user" />
-                        </svg>
-                    </a>
+                    <div class="header-tools__item hover-container">
+                        <div class="dropdown">
+                            <a href="#" class="header-tools__item" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="mx-2">{{ Auth::user()->name }}</span>
+                                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_user" />
+                                </svg>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownUser1" style="z-index: 10000;">
+                                <li><a class="dropdown-item" href="{{ Auth::user()->utype == 'admin' ? route('admin.index') : route('user.index') }}">Bảng điều khiển</a></li>
+                                <li><a class="dropdown-item" href="{{ route('address.index') }}">Địa chỉ</a></li>
+                                <li><a class="dropdown-item" href="{{ route('donhangs.index') }}">Đơn hàng</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form action="{{ route('logout') }}" method="post" id="logout-form-header">
+                                        @csrf
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-header').submit();">Đăng xuất</a>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 @endguest
             </div>
         </div>

@@ -3,7 +3,7 @@
     <div class="header-dashboard">
         <div class="wrap">
             <div class="header-left">
-                <a href="index-2.html">
+                <a href="{{ route('admin.index') }}">
                     <img class="" id="logo_header_mobile" alt="" src="{{ asset('assets/admins/images/logo/logo.png') }}"
                         data-light="{{ asset('assets/admins/images/logo/logo.png') }}" data-dark="{{ asset('assets/admins/images/logo/logo.png') }}"
                         data-width="154px" data-height="52px" data-retina="{{ asset('assets/admins/images/logo/logo.png') }}">
@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="flex items-center justify-between gap20 flex-grow">
                                             <div class="name">
-                                                <a href="product-list.html" class="body-text">Dog Food
+                                                <a href="{{ route('san_phams.index') }}" class="body-text">Dog Food
                                                     Rachael Ray Nutrish®</a>
                                             </div>
                                         </div>
@@ -264,7 +264,10 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="login.html" class="user-item">
+                                <form action="{{ route('logout') }}" method="post" id="logout-form-nav" style="display: none;">
+                                    @csrf
+                                </form>
+                                <a href="{{ route('logout') }}" class="user-item" onclick="event.preventDefault(); document.getElementById('logout-form-nav').submit();">
                                     <div class="icon">
                                         <i class="icon-log-out"></i>
                                     </div>

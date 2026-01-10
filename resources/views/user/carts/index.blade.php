@@ -33,6 +33,9 @@
                     <table class="cart-table">
                         <thead>
                             <tr>
+                                <th style="width: 50px;">
+                                    <input type="checkbox" id="select-all" checked>
+                                </th>
                                 <th>Sản phẩm</th>
                                 <th></th>
                                 <th>Giá</th>
@@ -44,6 +47,9 @@
                         <tbody>
                             @foreach ($cart as $key => $item)
                                 <tr>
+                                    <td>
+                                        <input type="checkbox" class="product-checkbox" value="{{ $key }}" checked>
+                                    </td>
                                     <td>
                                         <div class="shopping-cart__product-item">
                                             <a href="{{ route('product.detail', $item['slug']) }}">
@@ -128,7 +134,7 @@
                                             </div>
                                             <div>Vận chuyển đến địa chỉ của bạn.</div>
                                             <div>
-                                                <a href="#" class="menu-link menu-link_us-s">ĐỔI ĐỊA CHỈ</a>
+                                                <a href="{{ route('address.index') }}" class="menu-link menu-link_us-s">ĐỔI ĐỊA CHỈ</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -141,7 +147,7 @@
                         </div>
                         <div class="mobile_fixed-btn_wrapper">
                             <div class="button-wrapper container">
-                                <a href="{{ route('donhangs.create') }}" class="btn btn-primary btn-checkout">TIẾN HÀNH THANH TOÁN</a>
+                                <a href="#" id="btn-checkout-action" class="btn btn-primary btn-checkout">TIẾN HÀNH THANH TOÁN</a>
                             </div>
                         </div>
                     </div>
@@ -150,3 +156,39 @@
         </section>
     </main>
 @endsection
+
+@section('js')
+<script>
+    $(document).ready(function() {
+        // Select All handler
+        $('#select-all').change(function() {
+            $('.product-checkbox').prop('checked', $(this).is(':checked'));
+        });
+
+        // Individual checkbox handler
+        $('.product-checkbox').change(function() {
+            if ($('.product-checkbox:checked').length == $('.product-checkbox').length) {
+                $('#select-all').prop('checked', true);
+            } else {
+                $('#select-all').prop('checked', false);
+            }
+        });
+
+        // Checkout button handler
+        $('#btn-checkout-action').click(function(e) {
+            e.preventDefault();
+            var selectedIds = [];
+            $('.product-checkbox:checked').each(function() {
+                selectedIds.push($(this).val());
+            });
+
+            if (selectedIds.length === 0) {
+                alert('Vui lòng chọn ít nhất một sản phẩm để thanh toán.');
+                return;
+            }
+
+            var url = "{{ route('donhangs.create') }}";
+            window.location.href = url + "?selected_products=" + selectedIds.join(',');
+        });
+    });
+</script>
