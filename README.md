@@ -13,3 +13,10 @@ npm install
 npm run dev
 php artisan serve
 => truy cap: http://localhost:8000
+
+tk admin:
+email: admin@example.com
+password: 123456
+tk user:
+email: user@example.com
+password: 123456
