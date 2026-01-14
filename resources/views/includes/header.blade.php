@@ -424,17 +424,17 @@
                                 <div class="sub-menu search-suggestion">
                                     <h6 class="sub-menu__title fs-base">Liên kết nhanh</h6>
                                     <ul class="sub-menu__list list-unstyled">
-                                        <li class="sub-menu__item"><a href="shop2.html"
+                                        <li class="sub-menu__item"><a href="{{ route('shop.index') }}"
                                                 class="menu-link menu-link_us-s">Hàng mới về</a>
                                         </li>
-                                        <li class="sub-menu__item"><a href="#"
+                                        <li class="sub-menu__item"><a href="{{ route('shop.index') }}"
                                                 class="menu-link menu-link_us-s">Váy</a></li>
-                                        <li class="sub-menu__item"><a href="shop3.html"
+                                        <li class="sub-menu__item"><a href="{{ route('shop.index') }}"
                                                 class="menu-link menu-link_us-s">Phụ kiện</a>
                                         </li>
-                                        <li class="sub-menu__item"><a href="#"
+                                        <li class="sub-menu__item"><a href="{{ route('shop.index') }}"
                                                 class="menu-link menu-link_us-s">Giày dép</a></li>
-                                        <li class="sub-menu__item"><a href="#"
+                                        <li class="sub-menu__item"><a href="{{ route('shop.index') }}"
                                                 class="menu-link menu-link_us-s">Áo nỉ</a></li>
                                     </ul>
                                 </div>
@@ -471,13 +471,14 @@
                     <div class="header-tools__item hover-container">
                         <div class="dropdown">
                             <a href="#" class="header-tools__item" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="mx-2">{{ Auth::user()->name }}</span>
+                                <?php /** @var \App\Models\User $user */ $user = auth()->user(); ?>
+                                <span class="mx-2">{{ $user->name }}</span>
                                 <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <use href="#icon_user" />
                                 </svg>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownUser1" style="z-index: 10000;">
-                                <li><a class="dropdown-item" href="{{ Auth::user()->utype == 'admin' ? route('admin.index') : route('user.index') }}">Bảng điều khiển</a></li>
+                                <li><a class="dropdown-item" href="{{ $user->utype == 'admin' ? route('admin.index') : route('user.index') }}">Bảng điều khiển</a></li>
                                 <li><a class="dropdown-item" href="{{ route('address.index') }}">Địa chỉ</a></li>
                                 <li><a class="dropdown-item" href="{{ route('donhangs.index') }}">Đơn hàng</a></li>
                                 <li><hr class="dropdown-divider"></li>

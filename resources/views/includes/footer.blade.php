@@ -57,65 +57,57 @@
             </div>
 
             <div class="footer-column footer-menu mb-4 mb-lg-0">
-                <h6 class="sub-menu__title text-uppercase">Company</h6>
+                <h6 class="sub-menu__title text-uppercase">Công ty</h6>
                 <ul class="sub-menu__list list-unstyled">
-                    <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">About
-                            Us</a></li>
-                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Careers</a>
+                    <li class="sub-menu__item"><a href="{{ route('about.index') }}" class="menu-link menu-link_us-s">Về chúng tôi</a></li>
+                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Tuyển dụng</a>
                     </li>
-                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Affiliates</a></li>
-                    <li class="sub-menu__item"><a href="blog_list1.html" class="menu-link menu-link_us-s">Blog</a></li>
-                    <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Contact Us</a>
+                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Liên kết</a></li>
+                    <li class="sub-menu__item"><a href="{{ route('post.index') }}" class="menu-link menu-link_us-s">Blog</a></li>
+                    <li class="sub-menu__item"><a href="{{ route('contact.index') }}" class="menu-link menu-link_us-s">Liên hệ</a>
                     </li>
                 </ul>
             </div>
 
             <div class="footer-column footer-menu mb-4 mb-lg-0">
-                <h6 class="sub-menu__title text-uppercase">Shop</h6>
+                <h6 class="sub-menu__title text-uppercase">Cửa hàng</h6>
                 <ul class="sub-menu__list list-unstyled">
-                    <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">New
-                            Arrivals</a></li>
-                    <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Accessories</a>
+                    <li class="sub-menu__item"><a href="{{ route('shop.index') }}" class="menu-link menu-link_us-s">Hàng mới về</a></li>
+                    <li class="sub-menu__item"><a href="{{ route('shop.index') }}" class="menu-link menu-link_us-s">Phụ kiện</a>
                     </li>
-                    <li class="sub-menu__item"><a href="shop4.html" class="menu-link menu-link_us-s">Men</a>
+                    <li class="sub-menu__item"><a href="{{ route('shop.index') }}" class="menu-link menu-link_us-s">Nam</a>
                     </li>
-                    <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Women</a>
+                    <li class="sub-menu__item"><a href="{{ route('shop.index') }}" class="menu-link menu-link_us-s">Nữ</a>
                     </li>
-                    <li class="sub-menu__item"><a href="shop1.html" class="menu-link menu-link_us-s">Shop
-                            All</a></li>
+                    <li class="sub-menu__item"><a href="{{ route('shop.index') }}" class="menu-link menu-link_us-s">Tất cả sản phẩm</a></li>
                 </ul>
             </div>
 
             <div class="footer-column footer-menu mb-4 mb-lg-0">
-                <h6 class="sub-menu__title text-uppercase">Help</h6>
+                <h6 class="sub-menu__title text-uppercase">Trợ giúp</h6>
                 <ul class="sub-menu__list list-unstyled">
-                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Customer
-                            Service</a></li>
-                    <li class="sub-menu__item"><a href="account_dashboard.html" class="menu-link menu-link_us-s">My
-                            Account</a>
+                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Dịch vụ khách hàng</a></li>
+                    <li class="sub-menu__item"><a href="{{ route('user.index') }}" class="menu-link menu-link_us-s">Tài khoản của tôi</a>
                     </li>
-                    <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Find a
-                            Store</a>
+                    <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Tìm cửa hàng</a>
                     </li>
-                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Legal &
-                            Privacy</a></li>
-                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Gift
-                            Card</a></li>
+                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Pháp lý & Bảo mật</a></li>
+                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Thẻ quà tặng</a></li>
                 </ul>
             </div>
 
             <div class="footer-column footer-menu mb-4 mb-lg-0">
-                <h6 class="sub-menu__title text-uppercase">Categories</h6>
+                <h6 class="sub-menu__title text-uppercase">Danh mục</h6>
                 <ul class="sub-menu__list list-unstyled">
-                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shirts</a>
+                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Áo sơ mi</a>
                     </li>
-                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Jeans</a>
+                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Quần Jeans</a>
                     </li>
-                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shoes</a>
+                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Giày dép</a>
                     </li>
-                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Bags</a>
+                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Túi xách</a>
                     </li>
-                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shop All</a>
+                    <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Tất cả sản phẩm</a>
                     </li>
                 </ul>
             </div>
@@ -126,9 +118,7 @@
         <div class="container d-md-flex align-items-center">
             <span class="footer-copyright me-auto">©2024 Surfside Media</span>
             <div class="footer-settings d-md-flex align-items-center">
-                <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terms
-                    &amp;
-                    Conditions</a>
+                <a href="privacy-policy.html">Chính sách bảo mật</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Điều khoản & Điều kiện</a>
             </div>
         </div>
     </div>
@@ -143,7 +133,7 @@
                     xmlns="http://www.w3.org/2000/svg">
                     <use href="#icon_home" />
                 </svg>
-                <span>Home</span>
+                <span>Trang chủ</span>
             </a>
         </div>
 
@@ -153,7 +143,7 @@
                     xmlns="http://www.w3.org/2000/svg">
                     <use href="#icon_hanger" />
                 </svg>
-                <span>Shop</span>
+                <span>Cửa hàng</span>
             </a>
         </div>
 
@@ -166,7 +156,7 @@
                     </svg>
                     <span class="wishlist-amount d-block position-absolute js-wishlist-count">3</span>
                 </div>
-                <span>Wishlist</span>
+                <span>Yêu thích</span>
             </a>
         </div>
     </div>
@@ -184,15 +174,15 @@
                 "closeButton": true
             };
 
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
+            <?php if ($errors->any()): ?>
+                <?php foreach ($errors->all() as $error): ?>
                     toastr.error('{{ $error }}', 'Lỗi');
-                @endforeach
-            @endif
+                <?php endforeach; ?>
+            <?php endif; ?>
 
-            @if (Session::has('success'))
-                toastr.success('{{ Session::get('success') }}', 'Thông báo');
-            @endif
+            <?php if (session()->has('success')): ?>
+                toastr.success("{!! session('success') !!}", 'Thông báo');
+            <?php endif; ?>
         });
     })(jQuery);
 </script>

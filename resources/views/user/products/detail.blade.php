@@ -258,7 +258,7 @@
                         </div>
                         <div class="product-single__review-form">
                             <form name="customer-review-form">
-                                <h5>Hãy là người đầu tiên đánh giá “Message Cotton T-Shirt”</h5>
+                                <h5>Hãy là người đầu tiên đánh giá “{{ $sanPham->ten }}”</h5>
                                 <p>Email của bạn sẽ không được hiển thị. Các trường bắt buộc được đánh dấu *</p>
                                 <div class="select-star-rating">
                                     <label>Đánh giá của bạn *</label>

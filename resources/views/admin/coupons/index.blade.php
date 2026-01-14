@@ -19,7 +19,7 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Loại</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Giá trị</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hết hạn</th>
-                                    <th class="text-secondary opacity-7">Action</th>
+                                    <th class="text-secondary opacity-7">Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>

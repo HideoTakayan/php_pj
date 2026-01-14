@@ -6,13 +6,12 @@
         <!-- main-content-wrap -->
         <div class="main-content-wrap">
             <div class="flex items-center flex-wrap justify-between gap20 mb-10">
-                <a href="{{ route('san_phams.index') }}"><button class="btn btn-warning tf-button-back w180">Back to
-                        lists</button></a>
-                <h3>Edit Product</h3>
+                <a href="{{ route('san_phams.index') }}"><button class="btn btn-warning tf-button-back w180">Danh sách sản phẩm</button></a>
+                <h3>Cập nhật sản phẩm</h3>
                 <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                     <li>
                         <a href="index.html">
-                            <div class="text-tiny">Dashboard</div>
+                            <div class="text-tiny">Bảng điều khiển</div>
                         </a>
                     </li>
                     <li>
@@ -20,14 +19,14 @@
                     </li>
                     <li>
                         <a href="all-product.html">
-                            <div class="text-tiny">Products</div>
+                            <div class="text-tiny">Sản phẩm</div>
                         </a>
                     </li>
                     <li>
                         <i class="icon-chevron-right"></i>
                     </li>
                     <li>
-                        <div class="text-tiny">Edit product</div>
+                        <div class="text-tiny">Cập nhật sản phẩm</div>
                     </li>
                 </ul>
             </div>
@@ -41,9 +40,9 @@
                 @method('PUT')
                 <div class="wg-box">
                     <fieldset class="name">
-                        <div class="body-title mb-10">Product name <span class="tf-color-1">*</span></div>
+                        <div class="body-title mb-10">Tên sản phẩm <span class="tf-color-1">*</span></div>
                         <input class="mb-10 @error('ten') is-invalid @enderror form-control" type="text"
-                            placeholder="Enter product name" name="ten" tabindex="0" aria-required="true"
+                            placeholder="Nhập tên sản phẩm" name="ten" tabindex="0" aria-required="true"
                             value="{{ old('ten', $sanPham->ten) }}">
                         @error('ten')
                             <div class="text-tiny text-danger">{{ $message }}</div>
@@ -59,9 +58,9 @@
                     @enderror --}}
 
                     <fieldset class="name">
-                        <div class="body-title mb-10">Slug <span class="tf-color-1">*</span></div>
+                        <div class="body-title mb-10">Mã nhận diện (Slug) <span class="tf-color-1">*</span></div>
                         <input class="mb-10 @error('slug') is-invalid @enderror form-control" type="text"
-                            placeholder="Enter product slug" name="slug" tabindex="0" aria-required="true"
+                            placeholder="Nhập mã nhận diện" name="slug" tabindex="0" aria-required="true"
                             value="{{ old('slug', $sanPham->slug) }}">
                         @error('slug')
                             <div class="text-tiny text-danger">
@@ -80,10 +79,10 @@
 
                     <div class="gap22 cols">
                         <fieldset class="category">
-                            <div class="body-title mb-10">Category <span class="tf-color-1">*</span></div>
+                            <div class="body-title mb-10">Danh mục <span class="tf-color-1">*</span></div>
                             <div class="select mb-10 ">
                                 <select class="@error('danh_muc_id') error-border @enderror" name="danh_muc_id">
-                                    <option value="">Choose category</option>
+                                    <option value="">Chọn danh mục</option>
                                     @foreach ($danhMucs as $danhMuc)
                                         <option value="{{ $danhMuc->id }}"
                                             {{ old('danh_muc_id', $sanPham->danh_muc_id) == $danhMuc->id ? 'selected' : '' }}>
@@ -122,9 +121,9 @@
                     </div>
 
                     <fieldset class="shortdescription">
-                        <div class="body-title mb-10">Short Description <span class="tf-color-1">*</span></div>
+                        <div class="body-title mb-10">Mô tả ngắn <span class="tf-color-1">*</span></div>
                         <textarea class="mb-10 ht-150 @error('mo_ta_ngan') error-border @enderror" name="mo_ta_ngan"
-                            placeholder="Short Description" tabindex="0" aria-required="true">{{ old('mo_ta_ngan', $sanPham->mo_ta_ngan) }}</textarea>
+                            placeholder="Mô tả ngắn" tabindex="0" aria-required="true">{{ old('mo_ta_ngan', $sanPham->mo_ta_ngan) }}</textarea>
                         @error('mo_ta_ngan')
                             <div class="text-tiny text-danger">{{ $message }}</div>
                         @enderror
@@ -139,8 +138,8 @@
                     @enderror --}}
 
                     <fieldset class="description">
-                        <div class="body-title mb-10">Description <span class="tf-color-1">*</span></div>
-                        <textarea id="mo_ta" class="mb-10 @error('mo_ta') error-border @enderror " name="mo_ta" placeholder="Description"
+                        <div class="body-title mb-10">Mô tả chi tiết <span class="tf-color-1">*</span></div>
+                        <textarea id="mo_ta" class="mb-10 @error('mo_ta') error-border @enderror " name="mo_ta" placeholder="Mô tả chi tiết"
                             tabindex="0" aria-required="true">{{ old('mo_ta', $sanPham->mo_ta) }}</textarea>
                     </fieldset>
                     @error('mo_ta')
@@ -158,10 +157,10 @@
 
                 <div class="wg-box">
                     <fieldset>
-                        <div class="body-title mb-10">Upload images <span class="tf-color-1">*</span></div>
+                        <div class="body-title mb-10">Tải ảnh sản phẩm <span class="tf-color-1">*</span></div>
                         <div class="upload-image flex-grow mb-10">
                             @if ($sanPham->hinh_anh)
-                                <div class="item" id="imgpreview" style="">
+                                <div class="item" id="imgpreview">
                                     <img src="{{ check_image_url($sanPham->hinh_anh) }}" class="effect8" alt="">
                                 </div>
                             @endif
@@ -170,8 +169,7 @@
                                     <span class="icon">
                                         <i class="icon-upload-cloud"></i>
                                     </span>
-                                    <span class="body-text">Drop your images here or select <span class="tf-color">click to
-                                            browse</span></span>
+                                    <span class="body-text">Kéo thả ảnh vào đây hoặc <span class="tf-color">chọn ảnh</span></span>
                                     <input type="file" id="myFile" name="hinh_anh" accept="image/*">
                                 </label>
                             </div>
@@ -190,7 +188,7 @@
                     @enderror --}}
 
                     <fieldset>
-                        <div class="body-title mb-10">Upload Gallery Images</div>
+                        <div class="body-title mb-10">Tải thư viện ảnh</div>
                         <div class="upload-image mb-16">
                             @if ($sanPham->hinh_anh_chi_tiet)
                                 @foreach (explode(',', $sanPham->hinh_anh_chi_tiet) as $hinh_anh)
@@ -204,8 +202,7 @@
                                     <span class="icon">
                                         <i class="icon-upload-cloud"></i>
                                     </span>
-                                    <span class="text-tiny">Drop your images here or select <span class="tf-color">click
-                                            to browse</span></span>
+                                    <span class="text-tiny">Kéo thả ảnh vào đây hoặc <span class="tf-color">chọn ảnh</span></span>
                                     <input type="file" id="gFile" name="hinh_anh_chi_tiet[]" accept="image/*"
                                         multiple>
                                 </label>
@@ -225,9 +222,9 @@
                     @enderror --}}
                     <div class="cols gap22">
                         <fieldset class="name">
-                            <div class="body-title mb-10">Regular Price <span class="tf-color-1">*</span></div>
+                            <div class="body-title mb-10">Giá niêm yết <span class="tf-color-1">*</span></div>
                             <input class="mb-10 @error('gia') is-invalid @enderror form-control" type="text"
-                                placeholder="Enter regular price" name="gia" tabindex="0"
+                                placeholder="Nhập giá niêm yết" name="gia" tabindex="0"
                                 value="{{ old('gia', $sanPham->gia) }}" aria-required="true">
                             @error('gia')
                                 <div class="text-tiny text-danger">{{ $message }}</div>
@@ -243,9 +240,9 @@
                         @enderror --}}
 
                         <fieldset class="name">
-                            <div class="body-title mb-10">Sale Price <span class="tf-color-1">*</span></div>
+                            <div class="body-title mb-10">Giá bán (khuyến mãi) <span class="tf-color-1">*</span></div>
                             <input class="mb-10 @error('gia_giam') is-invalid @enderror form-control" type="text"
-                                placeholder="None" name="gia_giam" tabindex="0"
+                                placeholder="Không có" name="gia_giam" tabindex="0"
                                 value="{{ old('gia_giam', $sanPham->gia_giam) }}" aria-required="true">
                             @error('gia_giam')
                                 <div class="text-tiny text-danger">{{ $message }}</div>
@@ -264,9 +261,9 @@
 
                     <div class="cols gap22">
                         <fieldset class="name">
-                            <div class="body-title mb-10">SKU <span class="tf-color-1">*</span></div>
+                            <div class="body-title mb-10">Mã kho hàng (SKU) <span class="tf-color-1">*</span></div>
                             <input class="mb-10 @error('ma_sp') is-invalid @enderror form-control" type="text"
-                                placeholder="Enter SKU" name="ma_sp" tabindex="0"
+                                placeholder="Nhập mã SKU" name="ma_sp" tabindex="0"
                                 value="{{ old('ma_sp', $sanPham->ma_sp) }}" aria-required="true">
                             @error('ma_sp')
                                 <div class="text-tiny text-danger">{{ $message }}</div>
@@ -281,9 +278,9 @@
                             </fieldset>
                         @enderror --}}
                         <fieldset class="name">
-                            <div class="body-title mb-10">Quantity <span class="tf-color-1">*</span></div>
+                            <div class="body-title mb-10">Số lượng <span class="tf-color-1">*</span></div>
                             <input class="mb-10 @error('so_luong') is-invalid @enderror form-control" type="text"
-                                placeholder="Enter quantity" name="so_luong" tabindex="0"
+                                placeholder="Nhập số lượng" name="so_luong" tabindex="0"
                                 value="{{ old('so_luong', $sanPham->so_luong) }}" aria-required="true">
                             @error('so_luong')
                                 <div class="text-tiny text-danger">{{ $message }}</div>
@@ -301,15 +298,13 @@
 
                     <div class="cols gap22">
                         <fieldset class="name">
-                            <div class="body-title mb-10">Stock</div>
+                            <div class="body-title mb-10">Tình trạng kho</div>
                             <div class="select mb-10">
                                 <select class="" name="tinh_trang">
                                     <option value="con hang"
-                                        {{ old('tinh_trang', $sanPham->tinh_trang) == 'con hang' ? 'selected' : '' }}>In
-                                        Stock</option>
+                                        {{ old('tinh_trang', $sanPham->tinh_trang) == 'con hang' ? 'selected' : '' }}>Còn hàng</option>
                                     <option value="het hang"
-                                        {{ old('tinh_trang', $sanPham->tinh_trang) == 'het hang' ? 'selected' : '' }}>Out
-                                        of Stock</option>
+                                        {{ old('tinh_trang', $sanPham->tinh_trang) == 'het hang' ? 'selected' : '' }}>Hết hàng</option>
                                 </select>
                             </div>
                         </fieldset>
@@ -323,11 +318,11 @@
                         @enderror --}}
 
                         <fieldset class="name">
-                            <div class="body-title mb-10">Hot</div>
+                            <div class="body-title mb-10">Sản phẩm nổi bật</div>
                             <div class="select mb-10">
                                 <select class="" name="hot">
-                                    <option value="0"{{ old('hot', $sanPham->hot) == '0' ? 'selected' : '' }}>No</option>
-                                    <option value="1"{{ old('hot', $sanPham->hot) == '1' ? 'selected' : '' }}>Yes</option>
+                                    <option value="0"{{ old('hot', $sanPham->hot) == '0' ? 'selected' : '' }}>Không</option>
+                                    <option value="1"{{ old('hot', $sanPham->hot) == '1' ? 'selected' : '' }}>Có</option>
                                 </select>
                             </div>
                         </fieldset>
@@ -342,7 +337,7 @@
 
                     </div>
                     <div class="cols gap10">
-                        <button class="tf-button w-full" type="submit">Update product</button>
+                        <button class="tf-button w-full" type="submit">Cập nhật sản phẩm</button>
                     </div>
                 </div>
             </form>

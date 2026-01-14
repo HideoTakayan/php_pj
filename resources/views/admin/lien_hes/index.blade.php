@@ -14,7 +14,7 @@
                 <th>Email</th>
                 <th>Mô tả</th>
                 {{-- <th>Parent Category</th> --}}
-                <th>Action</th>
+                <th>Hành động</th>
             </tr>
         </thead>
         <tbody>

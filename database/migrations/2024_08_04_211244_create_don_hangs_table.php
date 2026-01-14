@@ -24,8 +24,10 @@ return new class extends Migration
             $table->text('ghi_chu');
             $table->string('trang_thai_don_hang')->default(DonHang::CHO_XAC_NHAN);
             $table->string('trang_thai_thanh_toan')->default(DonHang::CHUA_THANH_TOAN);
+             $table->string('phuong_thuc_thanh_toan')->default('COD');
             $table->double('tien_hang');
             $table->double('tien_ship');
+            $table->double('tien_giam_gia')->default(0);
             $table->double('tong_tien');
             $table->timestamps();
         });

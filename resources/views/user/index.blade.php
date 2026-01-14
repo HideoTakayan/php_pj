@@ -9,9 +9,9 @@
                 @include('user.account-nav')
                 <div class="col-lg-9">
                     <div class="page-content my-account__dashboard">
-                        <p>Xin chào <strong>{{ Auth::user()->name }}</strong></p>
+                        <p>Xin chào <strong>{{ $user->name }}</strong></p>
                         <p>Từ bảng điều khiển tài khoản, bạn có thể xem <a class="unerline-link"
-                                href="account_orders.html">đơn hàng gần đây</a>, quản lý <a class="unerline-link" href="account_edit_address.html">địa chỉ giao hàng</a>, và <a class="unerline-link" href="account_edit.html">chỉnh sửa mật khẩu và thông tin tài khoản.</a></p>
+                                href="{{ route('donhangs.index') }}">đơn hàng gần đây</a>, quản lý <a class="unerline-link" href="{{ route('address.index') }}">địa chỉ giao hàng</a>, và <a class="unerline-link" href="#">chỉnh sửa mật khẩu và thông tin tài khoản.</a></p>
                     </div>
                 </div>
             </div>

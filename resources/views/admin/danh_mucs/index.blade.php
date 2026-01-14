@@ -4,18 +4,18 @@
     <div class="main-content-inner">
         <div class="main-content-wrap">
             <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                <h3>Categories</h3>
+                <h3>Danh mục</h3>
                 <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                     <li>
                         <a href="{{ route('admin.index') }}">
-                            <div class="text-tiny">Dashboard</div>
+                            <div class="text-tiny">Bảng điều khiển</div>
                         </a>
                     </li>
                     <li>
                         <i class="icon-chevron-right"></i>
                     </li>
                     <li>
-                        <div class="text-tiny">Categories</div>
+                        <div class="text-tiny">Danh mục</div>
                     </li>
                 </ul>
             </div>
@@ -25,7 +25,7 @@
                     <div class="wg-filter flex-grow">
                         <form class="form-search" method="GET" action="{{ route('danh_mucs.index') }}">
                             <fieldset class="name">
-                                <input type="text" placeholder="Search here..." class="" name="search"
+                                <input type="text" placeholder="Tìm kiếm..." class="" name="search"
                                     tabindex="2" value="{{ request()->input('search') }}" aria-required="true">
                             </fieldset>
                             <div class="button-submit">
@@ -33,8 +33,7 @@
                             </div>
                         </form>
                     </div>
-                    <a class="tf-button style-1 w208" href="{{ route('danh_mucs.create') }}"><i class="icon-plus"></i>Add
-                        new</a>
+                    <a class="tf-button style-1 w208" href="{{ route('danh_mucs.create') }}"><i class="icon-plus"></i>Thêm mới</a>
                 </div>
                 <div class="wg-table table-all-user">
                     <table class="table table-striped table-bordered">
@@ -44,10 +43,10 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
+                                <th>Tên</th>
                                 <th>Slug</th>
                                 {{-- <th>Parent Category</th> --}}
-                                <th>Action</th>
+                                <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -99,26 +98,26 @@
                 var selectedForm = $(this).closest('form');
 
                 Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
+                    title: "Bạn có chắc không?",
+                    text: "Bạn sẽ không thể hoàn tác hành động này!",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, delete it!"
+                    confirmButtonText: "Có, xóa nó!"
                 }).then((result) => {
                     if (result.isConfirmed) {
                         selectedForm.submit();
                         Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
+                            title: "Đã xóa!",
+                            text: "Danh mục đã được xóa.",
                             icon: "success",
                             timer: 10000,
                         });
                     } else if (result.dismiss === Swal.DismissReason.cancel) {
                         Swal.fire({
-                            title: "Cancelled",
-                            text: "Your imaginary file is safe :)",
+                            title: "Đã hủy",
+                            text: "Dữ liệu vẫn an toàn :)",
                             icon: "error"
                         });
                     }

@@ -19,17 +19,17 @@
             @csrf
             <h3 class="mb-5">Liên lạc</h3>
             <div class="form-floating my-4">
-              <input type="text" class="form-control" name="name" placeholder="Name *" required="" >
+              <input type="text" class="form-control" name="name" placeholder="Tên *" required="" >
               <label for="contact_us_name">Tên *</label>
               <span class="text-danger"></span>
             </div>
             <div class="form-floating my-4">
-              <input type="text" class="form-control" name="phone" placeholder="Phone *" required="">
+              <input type="text" class="form-control" name="phone" placeholder="Số điện thoại *" required="">
               <label for="contact_us_name">Số điện thoại *</label>
               <span class="text-danger"></span>
             </div>
             <div class="form-floating my-4">
-              <input type="email" class="form-control" name="email" placeholder="Email address *" required="">
+              <input type="email" class="form-control" name="email" placeholder="Địa chỉ Email *" required="">
               <label for="contact_us_name">Địa chỉ email *</label>
               <span class="text-danger"></span>
             </div>

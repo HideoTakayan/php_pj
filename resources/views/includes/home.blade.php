@@ -28,9 +28,9 @@
                             <h6
                                 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
                                 Hàng mới về</h6>
-                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Night Spring
+                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Dạ tiệc Xuân
                             </h2>
-                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Dresses</h2>
+                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Váy đầm</h2>
                             <a href="#"
                                 class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Mua ngay</a>
                         </div>
@@ -46,7 +46,7 @@
                             <div class="character_markup">
                                 <p
                                     class="text-uppercase font-sofia fw-bold animate animate_fade animate_rtl animate_delay-10">
-                                    Summer
+                                    Mùa hè
                                 </p>
                             </div>
                         </div>
@@ -54,9 +54,9 @@
                             <h6
                                 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
                                 Hàng mới về</h6>
-                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Night Spring
+                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Dạ tiệc Xuân
                             </h2>
-                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Dresses</h2>
+                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Váy đầm</h2>
                             <a href="#"
                                 class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Mua ngay</a>
                         </div>
@@ -74,9 +74,9 @@
                             <h6
                                 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
                                 Hàng mới về</h6>
-                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Night Spring
+                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Dạ tiệc Xuân
                             </h2>
-                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Dresses</h2>
+                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Váy đầm</h2>
                             <a href="#"
                                 class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Mua ngay</a>
                         </div>
@@ -101,49 +101,44 @@
             "autoplay": {
               "delay": 5000
             },
-            "slidesPerView": 8,
+            "slidesPerView": 3,
             "slidesPerGroup": 1,
             "effect": "none",
-            "loop": true,
-            "navigation": {
-              "nextEl": ".products-carousel__next-1",
-              "prevEl": ".products-carousel__prev-1"
-            },
+            "loop": false,
             "breakpoints": {
               "320": {
-                "slidesPerView": 2,
-                "slidesPerGroup": 2,
+                "slidesPerView": 3,
                 "spaceBetween": 15
               },
               "768": {
-                "slidesPerView": 4,
-                "slidesPerGroup": 4,
+                "slidesPerView": 3,
                 "spaceBetween": 30
               },
               "992": {
-                "slidesPerView": 6,
-                "slidesPerGroup": 1,
+                "slidesPerView": 3,
                 "spaceBetween": 45,
-                "pagination": false
-              },
-              "1200": {
-                "slidesPerView": 8,
-                "slidesPerGroup": 1,
-                "spaceBetween": 60,
                 "pagination": false
               }
             }
           }'>
-                        <div class="swiper-wrapper">
-                            @foreach ($danhmucs as $item)
-                                <div class="swiper-slide">
-                                    <div class="rounded-circle overflow-hidden mb-3" style="width: 124px; height: 124px;">
-                                        <img loading="lazy" src="{{ check_image_url($item->hinh_anh) }}"
-                                            class="w-100 h-100 object-fit-cover" alt="" />
+                        <div class="swiper-wrapper justify-content-center">
+                            @php
+                                $cats = [
+                                    ['name' => 'Nam', 'icon' => 'cat-men.svg', 'param' => 'nam'],
+                                    ['name' => 'Nữ', 'icon' => 'cat-women.svg', 'param' => 'nu'],
+                                    ['name' => 'Phụ kiện', 'icon' => 'cat-accessories.svg', 'param' => 'phu-kien'],
+                                ];
+                            @endphp
+                            @foreach ($cats as $c)
+                                <div class="swiper-slide d-flex flex-column align-items-center">
+                                    <div class="rounded-circle overflow-hidden mb-3 d-flex align-items-center justify-content-center"
+                                         style="width: 124px; height: 124px; padding: 30px; background-color: #1a1a1a;">
+                                        <img loading="lazy" src="{{ asset('assets/images/categories/' . $c['icon']) }}"
+                                            class="w-100 h-100 object-fit-contain" alt="{{ $c['name'] }}" />
                                     </div>
                                     <div class="text-center">
-                                        <a href="{{ route('shop.index', ['danh_muc_id' => $item->id]) }}"
-                                            class="menu-link fw-medium text-truncate">{{ $item->ten }}<br /></a>
+                                        <a href="{{ route('shop.index', ['category_group' => $c['param']]) }}"
+                                            class="menu-link fw-bold fs-5 text-uppercase">{{ $c['name'] }}<br /></a>
                                     </div>
                                 </div>
                             @endforeach

@@ -83,6 +83,12 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
 
     // Admin Coupon Routes
     Route::resource('admin/coupons', \App\Http\Controllers\Admin\CouponController::class)->names('admin.coupons');
+
+    // Admin Slider Routes
+    Route::resource('admin/sliders', \App\Http\Controllers\Admin\SliderController::class)->names('admin.sliders');
+
+    // Admin User Routes
+    Route::resource('admin/users', \App\Http\Controllers\Admin\UserController::class)->names('admin.users');
 });
 
 // profile, post, product reviews

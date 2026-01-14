@@ -227,7 +227,7 @@
                                         <td class="text-center">$36.12</td>
                                         <td class="text-center">$208.12</td>
 
-                                        <td class="text-center">ordered</td>
+                                        <td class="text-center">Đã đặt hàng</td>
                                         <td class="text-center">2024-07-11 00:54:14</td>
                                         <td class="text-center">2</td>
                                         <td></td>

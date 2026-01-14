@@ -17,8 +17,22 @@ class ShopController extends Controller
         $query = SanPham::query();
 
         // lọc theo danh mục
+        // lọc theo danh mục
         if ($request->has('danh_muc_id')) {
-            $query->where('danh_muc_id', $request->input('danh_muc_id'))->paginate(8);
+            $query->where('danh_muc_id', $request->input('danh_muc_id'));
+        }
+
+        if ($request->has('category_group')) {
+            $group = $request->input('category_group');
+            $query->whereHas('danh_muc', function ($q) use ($group) {
+                if ($group == 'nam') {
+                    $q->where('slug', 'like', '%-nam%')->orWhere('slug', 'like', '%nam-%');
+                } elseif ($group == 'nu') {
+                    $q->where('slug', 'like', '%-nu%')->orWhere('slug', 'like', '%nu-%');
+                } elseif ($group == 'phu-kien') {
+                    $q->where('slug', 'like', '%phu-kien%');
+                }
+            });
         }
 
         $danhMucs = DanhMuc::all();

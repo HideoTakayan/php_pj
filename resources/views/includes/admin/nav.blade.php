@@ -15,7 +15,7 @@
 
                 <form class="form-search flex-grow">
                     <fieldset class="name">
-                        <input type="text" placeholder="Search here..." class="show-search" name="name"
+                        <input type="text" placeholder="Tìm kiếm..." class="show-search" name="name"
                             tabindex="2" value="" aria-required="true" required="">
                     </fieldset>
                     <div class="button-submit">
@@ -24,7 +24,7 @@
                     <div class="box-content-search" id="box-content-search">
                         <ul class="mb-24">
                             <li class="mb-14">
-                                <div class="body-title">Top selling product</div>
+                                <div class="body-title">Sản phẩm bán chạy</div>
                             </li>
                             <li class="mb-14">
                                 <div class="divider"></div>
@@ -75,7 +75,7 @@
                         </ul>
                         <ul class="">
                             <li class="mb-14">
-                                <div class="body-title">Order product</div>
+                                <div class="body-title">Đơn hàng mới</div>
                             </li>
                             <li class="mb-14">
                                 <div class="divider"></div>
@@ -156,7 +156,7 @@
                         <ul class="dropdown-menu dropdown-menu-end has-content"
                             aria-labelledby="dropdownMenuButton2">
                             <li>
-                                <h6>Notifications</h6>
+                                <h6>Thông báo</h6>
                             </li>
                             <li>
                                 <div class="message-item item-1">
@@ -164,7 +164,7 @@
                                         <i class="icon-noti-1"></i>
                                     </div>
                                     <div>
-                                        <div class="body-title-2">Discount available</div>
+                                        <div class="body-title-2">Giảm giá có sẵn</div>
                                         <div class="text-tiny">Morbi sapien massa, ultricies at rhoncus
                                             at, ullamcorper nec diam</div>
                                     </div>
@@ -176,7 +176,7 @@
                                         <i class="icon-noti-2"></i>
                                     </div>
                                     <div>
-                                        <div class="body-title-2">Account has been verified</div>
+                                        <div class="body-title-2">Tài khoản đã được xác minh</div>
                                         <div class="text-tiny">Mauris libero ex, iaculis vitae rhoncus
                                             et</div>
                                     </div>
@@ -188,7 +188,7 @@
                                         <i class="icon-noti-3"></i>
                                     </div>
                                     <div>
-                                        <div class="body-title-2">Order shipped successfully</div>
+                                        <div class="body-title-2">Đơn hàng đã giao thành công</div>
                                         <div class="text-tiny">Integer aliquam eros nec sollicitudin
                                             sollicitudin</div>
                                     </div>
@@ -200,13 +200,13 @@
                                         <i class="icon-noti-4"></i>
                                     </div>
                                     <div>
-                                        <div class="body-title-2">Order pending: <span>ID 305830</span>
+                                        <div class="body-title-2">Đơn chờ xử lý: <span>ID 305830</span>
                                         </div>
                                         <div class="text-tiny">Ultricies at rhoncus at ullamcorper</div>
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="#" class="tf-button w-full">View all</a></li>
+                            <li><a href="#" class="tf-button w-full">Xem tất cả</a></li>
                         </ul>
                     </div>
                 </div>
@@ -223,7 +223,7 @@
                                     <img src="{{ asset('assets/admins/images/avatar/user-1.png') }}" alt="">
                                 </span>
                                 <span class="flex flex-column">
-                                    <span class="body-title mb-2">{{ Auth::user()->name }}</span>
+                                    <span class="body-title mb-2">{{ auth()->check() ? auth()->user()->name : 'User' }}</span>
                                     {{-- <span class="text-tiny">Admin</span> --}}
                                 </span>
                             </span>
@@ -235,7 +235,7 @@
                                     <div class="icon">
                                         <i class="icon-user"></i>
                                     </div>
-                                    <div class="body-title-2">Account</div>
+                                    <div class="body-title-2">Tài khoản</div>
                                 </a>
                             </li>
                             <li>
@@ -243,7 +243,7 @@
                                     <div class="icon">
                                         <i class="icon-mail"></i>
                                     </div>
-                                    <div class="body-title-2">Inbox</div>
+                                    <div class="body-title-2">Hộp thư</div>
                                     <div class="number">27</div>
                                 </a>
                             </li>
@@ -252,7 +252,7 @@
                                     <div class="icon">
                                         <i class="icon-file-text"></i>
                                     </div>
-                                    <div class="body-title-2">Taskboard</div>
+                                    <div class="body-title-2">Bảng công việc</div>
                                 </a>
                             </li>
                             <li>
@@ -260,7 +260,7 @@
                                     <div class="icon">
                                         <i class="icon-headphones"></i>
                                     </div>
-                                    <div class="body-title-2">Support</div>
+                                    <div class="body-title-2">Hỗ trợ</div>
                                 </a>
                             </li>
                             <li>
@@ -271,7 +271,7 @@
                                     <div class="icon">
                                         <i class="icon-log-out"></i>
                                     </div>
-                                    <div class="body-title-2">Log out</div>
+                                    <div class="body-title-2">Đăng xuất</div>
                                 </a>
                             </li>
                         </ul>

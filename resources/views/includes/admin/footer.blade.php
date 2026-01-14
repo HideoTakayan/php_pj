@@ -12,15 +12,15 @@
             // "positionClass": "toast-top-full-width"
         };
 
-        @if ($errors->any())
-            @foreach ($errors->all() as $error)
+        <?php if($errors->any()): ?>
+            <?php foreach($errors->all() as $error): ?>
                 toastr.error('{{ $error }}', 'Lỗi');
-            @endforeach
-        @endif
+            <?php endforeach; ?>
+        <?php endif; ?>
         
-        @if (Session::has('success'))
-            toastr.success('{{ Session::get('success') }}', 'Thông báo');
-        @endif
+        <?php if(session()->has('success')): ?>
+            toastr.success("{!! session('success') !!}");
+        <?php endif; ?>
 
         var tfLineChart = (function() {
 
@@ -28,23 +28,23 @@
 
                 var options = {
                     series: [{
-                            name: 'Total',
+                            name: 'Tổng cộng',
                             data: [0.00, 0.00, 0.00, 0.00, 0.00, 273.22, 208.12, 0.00, 0.00,
                                 0.00, 0.00, 0.00
                             ]
                         }, {
-                            name: 'Pending',
+                            name: 'Chờ xử lý',
                             data: [0.00, 0.00, 0.00, 0.00, 0.00, 273.22, 208.12, 0.00, 0.00,
                                 0.00, 0.00, 0.00
                             ]
                         },
                         {
-                            name: 'Delivered',
+                            name: 'Đã giao',
                             data: [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
                                 0.00, 0.00
                             ]
                         }, {
-                            name: 'Canceled',
+                            name: 'Đã hủy',
                             data: [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
                                 0.00, 0.00
                             ]
@@ -80,8 +80,8 @@
                                 colors: '#212529',
                             },
                         },
-                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-                            'Oct', 'Nov', 'Dec'
+                        categories: ['Th1', 'Th2', 'Th3', 'Th4', 'Th5', 'Th6', 'Th7', 'Th8', 'Th9',
+                            'Th10', 'Th11', 'Th12'
                         ],
                     },
                     yaxis: {

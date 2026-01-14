@@ -127,7 +127,7 @@
                                 </ul>
                             </li>
                             <li class="menu-item">
-                                <a href="slider.html" class="">
+                                <a href="{{ route('admin.sliders.index') }}" class="">
                                     <div class="icon"><i class="icon-image"></i></div>
                                     <div class="text">Quản lý Slider</div>
                                 </a>
@@ -140,7 +140,7 @@
                             </li>
 
                             <li class="menu-item">
-                                <a href="users.html" class="">
+                                <a href="{{ route('admin.users.index') }}" class="">
                                     <div class="icon"><i class="icon-user"></i></div>
                                     <div class="text">Người dùng</div>
                                 </a>
