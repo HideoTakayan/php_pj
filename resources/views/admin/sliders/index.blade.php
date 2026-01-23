@@ -1,64 +1,97 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="card my-4">
-                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
-                        <h6 class="text-white text-capitalize ps-3 mb-0">Danh sách Sliders</h6>
-                        <a href="{{ route('admin.sliders.create') }}" class="btn btn-sm btn-light me-3 mb-0">Thêm mới</a>
+    <div class="main-content-inner">
+        <div class="main-content-wrap">
+            <div class="flex items-center flex-wrap justify-between gap20 mb-27">
+                <h3>Danh sách Sliders</h3>
+                <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
+                    <li>
+                        <a href="{{ route('admin.index') }}">
+                            <div class="text-tiny">Bảng điều khiển</div>
+                        </a>
+                    </li>
+                    <li>
+                        <i class="icon-chevron-right"></i>
+                    </li>
+                    <li>
+                        <div class="text-tiny">Sliders</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="wg-box">
+                <div class="flex items-center justify-between gap10 flex-wrap">
+                    <div class="wg-filter flex-grow">
+                        <form class="form-search">
+                            <fieldset class="name">
+                                <input type="text" placeholder="Tìm kiếm ở đây..." class="" name="name" tabindex="2" value="" aria-required="true" required="">
+                            </fieldset>
+                            <div class="button-submit">
+                                <button class="" type="submit"><i class="icon-search"></i></button>
+                            </div>
+                        </form>
                     </div>
+                    <a class="tf-button style-1 w208" href="{{ route('admin.sliders.create') }}"><i class="icon-plus"></i>Thêm mới</a>
                 </div>
-                <div class="card-body px-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
+                <div class="wg-table table-all-user">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hình ảnh</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tiêu đề - Link</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
-                                    <th class="text-secondary opacity-7">Hành động</th>
+                                    <th>#</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Tiêu đề</th>
+                                    <th>Link</th>
+                                    <th class="text-center">Trạng thái</th>
+                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($sliders as $slider)
                                     <tr>
+                                        <td>{{ $slider->id }}</td>
                                         <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{{ Storage::url($slider->image) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="slider" style="width: 100px; height: auto; object-fit: cover;">
-                                                </div>
+                                            <div class="image">
+                                                <img src="{{ Storage::url($slider->image) }}" alt="image" style="width: 100px; height: auto;">
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $slider->title }}</p>
-                                            <p class="text-xs text-secondary mb-0">{{ $slider->link }}</p>
+                                            <div class="name">
+                                                <a href="#" class="body-title-2">{{ $slider->title }}</a>
+                                                <div class="text-tiny mt-3">{{ $slider->subtitle }}</div>
+                                            </div>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm {{ $slider->status ? 'bg-gradient-success' : 'bg-gradient-secondary' }}">
+                                        <td>{{ $slider->link }}</td>
+                                        <td class="text-center">
+                                            <div class="block-available {{ $slider->status ? '' : 'not-available' }}">
                                                 {{ $slider->status ? 'Active' : 'Inactive' }}
-                                            </span>
+                                            </div>
                                         </td>
-                                        <td class="align-middle">
-                                            <a href="{{ route('admin.sliders.edit', $slider->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit slider">
-                                                Sửa
-                                            </a>
-                                            <form action="{{ route('admin.sliders.destroy', $slider->id) }}" method="POST" class="d-inline-block ms-2" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-link text-danger text-gradient p-0 m-0 text-xs font-weight-bold">
-                                                    Xóa
-                                                </button>
-                                            </form>
+                                        <td>
+                                            <div class="list-icon-function">
+                                                <a href="{{ route('admin.sliders.edit', $slider->id) }}">
+                                                    <div class="item edit">
+                                                        <i class="icon-edit-3"></i>
+                                                    </div>
+                                                </a>
+                                                <form action="{{ route('admin.sliders.destroy', $slider->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="item text-danger delete" style="border:none; background:none;">
+                                                        <i class="icon-trash-2"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="px-3">
-                            {{ $sliders->links() }}
-                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
+                        {{ $sliders->links() }}
                     </div>
                 </div>
             </div>

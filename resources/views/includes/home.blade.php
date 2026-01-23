@@ -3,7 +3,7 @@
 @section('content')
     <main>
 
-        <section class="swiper-container js-swiper-slider swiper-number-pagination slideshow"
+        <section class="swiper-container js-swiper-slider swiper-number-pagination slideshow" style="padding-top: 100px;"
             data-settings='{
         "autoplay": {
             "delay": 5000
@@ -16,22 +16,20 @@
                 <div class="swiper-slide">
                     <div class="overflow-hidden position-relative h-100">
                         <div class="slideshow-character position-absolute bottom-0 pos_right-center">
-                            <img loading="lazy" src="{{ asset('assets/images/home/demo3/slideshow-character1.png') }}"
+                            <img loading="lazy" src="{{ asset('assets/images/slideshow-character1.webp') }}"
                                 width="542" height="733" alt="Woman Fashion 1"
                                 class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto" />
                             <div class="character_markup type2">
-                                <p
-                                    Mùa xuân</p>
+                                <p class="text-uppercase font-sofia fw-bold animate animate_fade animate_rtl animate_delay-10">Mới nhất</p>
                             </div>
                         </div>
                         <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
-                            <h6
-                                class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
+                            <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
                                 Hàng mới về</h6>
-                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Dạ tiệc Xuân
+                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Thời trang Nam
                             </h2>
-                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Váy đầm</h2>
-                            <a href="#"
+                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Thanh lịch & Hiện đại</h2>
+                            <a href="{{ route('shop.index') }}"
                                 class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Mua ngay</a>
                         </div>
                     </div>
@@ -40,24 +38,22 @@
                 <div class="swiper-slide">
                     <div class="overflow-hidden position-relative h-100">
                         <div class="slideshow-character position-absolute bottom-0 pos_right-center">
-                            <img loading="lazy" src="{{ asset('assets/images/slideshow-character1.png') }}" width="400"
-                                height="733" alt="Woman Fashion 1"
+                            <img loading="lazy" src="{{ asset('assets/images/slideshow-character2.webp') }}" width="400"
+                                height="733" alt="Woman Fashion 2"
                                 class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto" />
                             <div class="character_markup">
-                                <p
-                                    class="text-uppercase font-sofia fw-bold animate animate_fade animate_rtl animate_delay-10">
-                                    Mùa hè
+                                <p class="text-uppercase font-sofia fw-bold animate animate_fade animate_rtl animate_delay-10">
+                                    Xu hướng
                                 </p>
                             </div>
                         </div>
                         <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
-                            <h6
-                                class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-                                Hàng mới về</h6>
-                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Dạ tiệc Xuân
+                            <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
+                                Phong cách sống</h6>
+                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Tối giản
                             </h2>
-                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Váy đầm</h2>
-                            <a href="#"
+                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Thoải mái mỗi ngày</h2>
+                            <a href="{{ route('shop.index') }}"
                                 class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Mua ngay</a>
                         </div>
                     </div>
@@ -66,18 +62,20 @@
                 <div class="swiper-slide">
                     <div class="overflow-hidden position-relative h-100">
                         <div class="slideshow-character position-absolute bottom-0 pos_right-center">
-                            <img loading="lazy" src="{{ asset('assets/images/slideshow-character2.png') }}" width="400"
-                                height="690" alt="Woman Fashion 2"
+                            <img loading="lazy" src="{{ asset('assets/images/slideshow-character3.webp') }}" width="400"
+                                height="690" alt="Woman Fashion 3"
                                 class="slideshow-character__img animate animate_fade animate_rtl animate_delay-10 w-auto h-auto" />
+                            <div class="character_markup type2">
+                                <p class="text-uppercase font-sofia fw-bold animate animate_fade animate_rtl animate_delay-10">Sale</p>
+                            </div>
                         </div>
                         <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
-                            <h6
-                                class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-                                Hàng mới về</h6>
-                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Dạ tiệc Xuân
+                            <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
+                                Khuyến mãi</h6>
+                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Ưu đãi mùa xuân
                             </h2>
-                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Váy đầm</h2>
-                            <a href="#"
+                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Giảm đến 36%</h2>
+                            <a href="{{ route('shop.index') }}"
                                 class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Mua ngay</a>
                         </div>
                     </div>
@@ -167,8 +165,8 @@
                 <div class="row">
                     <div
                         class="col-md-6 col-lg-4 col-xl-20per d-flex align-items-center flex-column justify-content-center py-4 align-items-md-start">
-                        <h2>Sale mùa hè</h2>
-                        <h2 class="fw-bold">Giảm tới 60%</h2>
+                        <h2>Sale mùa xuân</h2>
+                        <h2 class="fw-bold">Giảm tới 36%</h2>
 
                         <div class="position-relative d-flex align-items-center text-center pt-xxl-4 js-countdown mb-3"
                             data-date="18-3-2024" data-time="06:50">

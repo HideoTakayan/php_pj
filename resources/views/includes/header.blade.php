@@ -233,7 +233,8 @@
     }
 
     .logo__image {
-        max-width: 220px;
+        max-width: 60px;
+        height: auto;
     }
 </style>
 <div class="header-mobile header_sticky">
@@ -248,7 +249,7 @@
 
         <div class="logo">
             <a href="{{ route('home.index') }}">
-                <img src="/assets/images/logo.png" alt="Uomo" class="logo__image d-block" />
+                <img src="{{ asset('assets/images/logo.svg') }}" alt="Logo" class="logo__image d-block" />
             </a>
         </div>
 
@@ -287,7 +288,7 @@
             <div class="overflow-hidden">
                 <ul class="navigation__list list-unstyled position-relative">
                     <li class="navigation__item">
-                        <a href="" class="navigation__link">Trang chủ</a>
+                        <a href="{{ route('home.index') }}" class="navigation__link">Trang chủ</a>
                     </li>
                     <li class="navigation__item">
                         <a href="{{ route('shop.index') }}" class="navigation__link">Cửa hàng</a>
@@ -369,7 +370,7 @@
         <div class="header-desk header-desk_type_1">
             <div class="logo">
                 <a href="{{ route('home.index') }}">
-                    <img src="/assets/images/logo.png" alt="Uomo" class="logo__image d-block" />
+                    <img src="{{ asset('assets/images/logo.svg') }}" alt="Logo" class="logo__image d-block" />
                 </a>
             </div>
 
@@ -473,20 +474,25 @@
                             <a href="#" class="header-tools__item" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <?php /** @var \App\Models\User $user */ $user = auth()->user(); ?>
                                 <span class="mx-2">{{ $user->name }}</span>
-                                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_user" />
-                                </svg>
+                                @if($user->avatar && file_exists(public_path('uploads/users/' . $user->avatar)))
+                                    <img src="{{ asset('uploads/users/' . $user->avatar) }}" alt="Avatar" class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;">
+                                @else
+                                    <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#icon_user" />
+                                    </svg>
+                                @endif
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownUser1" style="z-index: 10000;">
                                 <li><a class="dropdown-item" href="{{ $user->utype == 'admin' ? route('admin.index') : route('user.index') }}">Bảng điều khiển</a></li>
+                                <li><a class="dropdown-item" href="{{ route('user.profile') }}">Tài khoản</a></li>
                                 <li><a class="dropdown-item" href="{{ route('address.index') }}">Địa chỉ</a></li>
                                 <li><a class="dropdown-item" href="{{ route('donhangs.index') }}">Đơn hàng</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <form action="{{ route('logout') }}" method="post" id="logout-form-header">
+                                    <form action="{{ route('logout') }}" method="post" id="logout-form-header" style="display: none;">
                                         @csrf
-                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-header').submit();">Đăng xuất</a>
                                     </form>
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-header').submit();">Đăng xuất</a>
                                 </li>
                             </ul>
                         </div>

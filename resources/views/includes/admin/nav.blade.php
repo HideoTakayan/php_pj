@@ -144,6 +144,7 @@
             </div>
             <div class="header-grid">
 
+                <!-- Notification disabled
                 <div class="popup-wrap message type-header">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -210,6 +211,7 @@
                         </ul>
                     </div>
                 </div>
+                -->
 
 
 
@@ -219,8 +221,7 @@
                         <button class="btn btn-secondary dropdown-toggle" type="button"
                             id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="header-user wg-user">
-                                <span class="image">
-                                    <img src="{{ asset('assets/admins/images/avatar/user-1.png') }}" alt="">
+                                    <img src="{{ Auth::user()->avatar ? asset('uploads/users/' . Auth::user()->avatar) : asset('assets/admins/images/avatar/99.jpg') }}" alt="" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
                                 </span>
                                 <span class="flex flex-column">
                                     <span class="body-title mb-2">{{ auth()->check() ? auth()->user()->name : 'User' }}</span>
@@ -231,36 +232,11 @@
                         <ul class="dropdown-menu dropdown-menu-end has-content"
                             aria-labelledby="dropdownMenuButton3">
                             <li>
-                                <a href="#" class="user-item">
+                                <a href="{{ route('admin.profile') }}" class="user-item">
                                     <div class="icon">
                                         <i class="icon-user"></i>
                                     </div>
                                     <div class="body-title-2">Tài khoản</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="user-item">
-                                    <div class="icon">
-                                        <i class="icon-mail"></i>
-                                    </div>
-                                    <div class="body-title-2">Hộp thư</div>
-                                    <div class="number">27</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="user-item">
-                                    <div class="icon">
-                                        <i class="icon-file-text"></i>
-                                    </div>
-                                    <div class="body-title-2">Bảng công việc</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="user-item">
-                                    <div class="icon">
-                                        <i class="icon-headphones"></i>
-                                    </div>
-                                    <div class="body-title-2">Hỗ trợ</div>
                                 </a>
                             </li>
                             <li>

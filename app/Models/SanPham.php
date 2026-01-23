@@ -36,4 +36,8 @@ class SanPham extends Model
     {
         return $this->gia_giam ?? $this->gia;
     }
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
 }

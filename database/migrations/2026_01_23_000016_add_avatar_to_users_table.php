@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('don_hangs', function (Blueprint $table) {
-            $table->string('phuong_thuc_thanh_toan')->default('COD')->after('trang_thai_thanh_toan');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('avatar')->nullable();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('don_hangs', function (Blueprint $table) {
-            $table->dropColumn('phuong_thuc_thanh_toan');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('avatar');
         });
     }
 };

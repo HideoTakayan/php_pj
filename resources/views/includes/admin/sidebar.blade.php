@@ -11,10 +11,10 @@
             <div class="section-menu-left">
                 <div class="box-logo">
                     <a href="{{ route('home.index') }}" id="site-logo-inner">
-                        <img class="w-75" id="logo" alt=""
-                            src="{{ asset('assets/admins/images/logo/logo3.png') }}"
-                            data-light="{{ asset('assets/admins/images/logo/logo3.png') }}"
-                            data-dark="{{ asset('assets/admins/images/logo/logo3.png') }}">
+                        <img id="logo" style="max-height: 50px; width: auto;" alt="Logo"
+                            src="{{ asset('assets/images/logo.svg') }}"
+                            data-light="{{ asset('assets/images/logo.svg') }}"
+                            data-dark="{{ asset('assets/images/logo.svg') }}">
                     </a>
                     <div class="button-show-hide">
                         <i class="icon-menu-left"></i>
@@ -101,7 +101,7 @@
                                         </a>
                                     </li>
                                     <li class="sub-menu-item">
-                                        <a href="order-tracking.html" class="">
+                                        <a href="{{ route('admin.orders.track') }}" class="">
                                             <div class="text">Theo dõi đơn hàng</div>
                                         </a>
                                     </li>
@@ -147,22 +147,22 @@
                             </li>
 
                             <li class="menu-item">
-                                <a href="settings.html" class="">
+                                <a href="#" onclick="alert('Tính năng đang phát triển'); return false;" class="">
                                     <div class="icon"><i class="icon-settings"></i></div>
                                     <div class="text">Cài đặt</div>
                                 </a>
                             </li>
 
                             <li class="menu-item">
-                                <form action="{{ route('logout') }}" method="post" id="logout-form">
+                                <form action="{{ route('logout') }}" method="post" id="logout-form-admin-sidebar" style="display: none;">
                                     @csrf
-                                    <a href="{{ route('logout') }}"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit()"
-                                        class="">
-                                        <div class="icon"><i class="icon-log-out"></i></div>
-                                        <div class="text">Đăng xuất</div>
-                                    </a>
                                 </form>
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form-admin-sidebar').submit()"
+                                    class="">
+                                    <div class="icon"><i class="icon-log-out"></i></div>
+                                    <div class="text">Đăng xuất</div>
+                                </a>
                             </li>
                         </ul>
                     </div>

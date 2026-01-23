@@ -59,7 +59,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/don-hang/create', [DonHangController::class, 'create'])->name('donhangs.create');
     Route::post('/don-hang/store', [DonHangController::class, 'store'])->name('donhangs.store');
     Route::get('/don-hang/show/{id}', [DonHangController::class, 'show'])->name('donhangs.show');
-    Route::put('/don-hang/update/{id}', [DonHangController::class, 'update'])->name('donhangs.update');
+    Route::get('/don-hang/update/{id}', [DonHangController::class, 'update'])->name('donhangs.update');
+    
+    // User Profile
+    Route::get('/account-details', [UserController::class, 'profile'])->name('user.profile');
+    Route::put('/account-details', [UserController::class, 'updateProfile'])->name('user.profile.update');
+
+    // Wishlist
+    Route::get('/wishlist', [\App\Http\Controllers\User\WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/add', [\App\Http\Controllers\User\WishlistController::class, 'add'])->name('wishlist.add');
+    Route::delete('/wishlist/remove/{id}', [\App\Http\Controllers\User\WishlistController::class, 'remove'])->name('wishlist.remove');
     
     // Coupon actions
     Route::post('/don-hang/coupon/apply', [DonHangController::class, 'applyCoupon'])->name('donhangs.coupon.apply');
@@ -71,13 +80,16 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
+    Route::put('/admin/profile', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
     Route::resource('admin/danh_mucs', DanhMucController::class);
     Route::resource('admin/san_phams', SanPhamController::class);
     Route::resource('admin/bai_viets', BaiVietController::class);
     
     // Admin Order Routes
     Route::get('/admin/orders', [\App\Http\Controllers\Admin\DonHangController::class, 'index'])->name('admin.orders.index');
+    Route::get('/admin/orders/track', [\App\Http\Controllers\Admin\DonHangController::class, 'track'])->name('admin.orders.track');
     Route::get('/admin/orders/{id}', [\App\Http\Controllers\Admin\DonHangController::class, 'show'])->name('admin.orders.show');
     Route::put('/admin/orders/{id}', [\App\Http\Controllers\Admin\DonHangController::class, 'update'])->name('admin.orders.update');
 

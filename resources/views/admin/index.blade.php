@@ -16,7 +16,7 @@
                                     </div>
                                     <div>
                                         <div class="body-text mb-2">Tổng đơn hàng</div>
-                                        <h4>3</h4>
+                                        <h4>{{ $totalOrders }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -31,7 +31,7 @@
                                     </div>
                                     <div>
                                         <div class="body-text mb-2">Tổng doanh thu</div>
-                                        <h4>481.34</h4>
+                                        <h4>{{ number_format($totalRevenue, 2) }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                                     </div>
                                     <div>
                                         <div class="body-text mb-2">Đơn chờ xử lý</div>
-                                        <h4>3</h4>
+                                        <h4>{{ $pendingOrders }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                     </div>
                                     <div>
                                         <div class="body-text mb-2">Doanh thu chờ xử lý</div>
-                                        <h4>481.34</h4>
+                                        <h4>{{ number_format($pendingRevenue, 2) }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                     </div>
                                     <div>
                                         <div class="body-text mb-2">Đơn đã giao</div>
-                                        <h4>0</h4>
+                                        <h4>{{ $deliveredOrders }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                                     </div>
                                     <div>
                                         <div class="body-text mb-2">Doanh thu đã giao</div>
-                                        <h4>0.00</h4>
+                                        <h4>{{ number_format($deliveredRevenue, 2) }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                                     </div>
                                     <div>
                                         <div class="body-text mb-2">Đơn đã hủy</div>
-                                        <h4>0</h4>
+                                        <h4>{{ $cancelledOrders }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@
                                     </div>
                                     <div>
                                         <div class="body-text mb-2">Doanh thu đã hủy</div>
-                                        <h4>0.00</h4>
+                                        <h4>{{ number_format($cancelledRevenue, 2) }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -161,10 +161,10 @@
                                 </div>
                             </div>
                             <div class="flex items-center gap10">
-                                <h4>$37,802</h4>
+                                <h4>$0.00</h4>
                                 <div class="box-icon-trending up">
                                     <i class="icon-trending-up"></i>
-                                    <div class="body-title number">0.56%</div>
+                                    <div class="body-title number">0.00%</div>
                                 </div>
                             </div>
                         </div>
@@ -176,10 +176,10 @@
                                 </div>
                             </div>
                             <div class="flex items-center gap10">
-                                <h4>$28,305</h4>
+                                <h4>0</h4>
                                 <div class="box-icon-trending up">
                                     <i class="icon-trending-up"></i>
-                                    <div class="body-title number">0.56%</div>
+                                    <div class="body-title number">0.00%</div>
                                 </div>
                             </div>
                         </div>
@@ -219,20 +219,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($recentOrders as $order)
                                     <tr>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">Divyansh Kumar</td>
-                                        <td class="text-center">1234567891</td>
-                                        <td class="text-center">$172.00</td>
-                                        <td class="text-center">$36.12</td>
-                                        <td class="text-center">$208.12</td>
+                                        <td class="text-center">{{ $order->ma_don_hang }}</td>
+                                        <td class="text-center">{{ $order->ten_nguoi_nhan }}</td>
+                                        <td class="text-center">{{ $order->sdt_nguoi_nhan }}</td>
+                                        <td class="text-center">${{ number_format($order->tien_hang, 2) }}</td>
+                                        <td class="text-center">$0.00</td>
+                                        <td class="text-center">${{ number_format($order->tong_tien, 2) }}</td>
 
-                                        <td class="text-center">Đã đặt hàng</td>
-                                        <td class="text-center">2024-07-11 00:54:14</td>
-                                        <td class="text-center">2</td>
+                                        <td class="text-center">
+                                            {{ \App\Models\DonHang::TRANG_THAI_DON_HANG[$order->trang_thai_don_hang] ?? $order->trang_thai_don_hang }}
+                                        </td>
+                                        <td class="text-center">{{ $order->created_at }}</td>
+                                        <td class="text-center">{{ $order->chiTietDonHang->sum('so_luong') }}</td>
                                         <td></td>
                                         <td class="text-center">
-                                            <a href="#">
+                                            <a href="{{ route('admin.orders.show', ['id' => $order->id]) }}">
                                                 <div class="list-icon-function view-icon">
                                                     <div class="item eye">
                                                         <i class="icon-eye"></i>
@@ -241,6 +244,7 @@
                                             </a>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

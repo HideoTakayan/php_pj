@@ -203,14 +203,15 @@
                                         </form>
                                     </div>
 
-                                    <button
-                                        class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
-                                        title="Thêm vào yêu thích">
-                                        <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <use href="#icon_heart" />
-                                        </svg>
-                                    </button>
+                                    <form action="{{ route('wishlist.add') }}" method="POST" style="position: absolute; top: 0; right: 0; z-index: 10;">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $sp->id }}">
+                                        <button type="submit" class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Thêm vào yêu thích">
+                                            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <use href="#icon_heart" />
+                                            </svg>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

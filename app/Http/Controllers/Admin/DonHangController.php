@@ -17,6 +17,21 @@ class DonHangController extends Controller
         return view('admin.orders.index', compact('donHangs'));
     }
 
+    public function track(Request $request)
+    {
+        $donHang = null;
+        if ($request->filled('keyword')) {
+            $keyword = $request->keyword;
+            $donHang = DonHang::with('chiTietDonHang.sanPham')
+                ->where('id', $keyword)
+                ->orWhere('ma_don_hang', $keyword)
+                ->orWhere('sdt_nguoi_nhan', $keyword)
+                ->orderByDesc('id')
+                ->first();
+        }
+        return view('admin.orders.track', compact('donHang'));
+    }
+
     /**
      * Display the specified resource.
      */

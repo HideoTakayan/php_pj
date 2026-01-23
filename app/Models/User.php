@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'mobile',
         'utype',
+        'avatar',
     ];
 
     /**
@@ -53,5 +54,9 @@ class User extends Authenticatable
     public function dia_chis()
     {
         return $this->hasMany(DiaChi::class);
+    }
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
     }
 }

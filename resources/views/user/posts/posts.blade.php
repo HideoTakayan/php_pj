@@ -78,27 +78,33 @@
 
 @section('content')
     <div class="post-container">
-        <div class="posts">
-            @foreach ($baiViets as $post)
-                <a href="{{ route('post.detail', $post->slug) }}" class="post">
-                    <div class="post-header">
-                        <h3>{{ $post->user->name }}</h3>
-                    </div>
-                    <div class="post-content">
-                        <h2>{{ $post->ten }}</h2>
-                        <div class="">{!! $post->noi_dung !!}</div>
-                    </div>
-                    <div class="post-image">
-                        <img src=" {{ check_image_url($post->anh_bia) }}" alt="{{ $post->ten }}">
-                    </div>
-                    <div class="post-info">
-                        <span>Đã đăng: {{ $post->created_at->diffForHumans() }}</span>
-                        <span>Ngày tạo: {{ $post->created_at->format('d/m/Y') }}</span>
-                        <span>Lượt xem: {{ $post->luot_xem }}</span>
-                        <span>Lượt thích: {{ $post->luot_thich }}</span>
-                    </div>
-                </a>
-            @endforeach
-        </div>
+        @if ($baiViets->isEmpty())
+            <div class="alert alert-info text-center my-5" role="alert">
+                <h3>Trang web hiện tại chưa có bài viết nào</h3>
+            </div>
+        @else
+            <div class="posts">
+                @foreach ($baiViets as $post)
+                    <a href="{{ route('post.detail', $post->slug) }}" class="post">
+                        <div class="post-header">
+                            <h3>{{ $post->user->name }}</h3>
+                        </div>
+                        <div class="post-content">
+                            <h2>{{ $post->ten }}</h2>
+                            <div class="">{!! $post->noi_dung !!}</div>
+                        </div>
+                        <div class="post-image">
+                            <img src=" {{ check_image_url($post->anh_bia) }}" alt="{{ $post->ten }}">
+                        </div>
+                        <div class="post-info">
+                            <span>Đã đăng: {{ $post->created_at->diffForHumans() }}</span>
+                            <span>Ngày tạo: {{ $post->created_at->format('d/m/Y') }}</span>
+                            <span>Lượt xem: {{ $post->luot_xem }}</span>
+                            <span>Lượt thích: {{ $post->luot_thich }}</span>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        @endif
     </div>
 @endsection

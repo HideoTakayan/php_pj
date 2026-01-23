@@ -141,6 +141,18 @@
                                 </div>
                             </details>
                         </share-button>
+                        
+                        <form action="{{ route('wishlist.add') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $sanPham->id }}">
+                            <button type="submit" class="menu-link menu-link_us-s border-0 bg-transparent d-flex align-items-center">
+                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_heart" />
+                                </svg>
+                                <span>Thêm vào yêu thích</span>
+                            </button>
+                        </form>
                         <script src="js/details-disclosure.html" defer="defer"></script>
                         <script src="js/share.html" defer="defer"></script>
                     </div>
