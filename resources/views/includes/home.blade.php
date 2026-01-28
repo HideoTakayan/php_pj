@@ -318,8 +318,8 @@
                     <div class="col-md-4 mb-4 mb-md-0">
                         <div class="service-item">
                             <svg width="40" height="40" class="mb-3 text-primary"><use href="#icon_shipping" /></svg>
-                            <h5 class="fw-bold mb-1">Miễn phí giao hàng</h5>
-                            <p class="text-secondary small mb-0">Cho đơn hàng trên $500.00</p>
+                            <h5 class="fw-bold mb-1">Giao hàng nhanh</h5>
+                            <p class="text-secondary small mb-0">Phí cố định 36,000đ toàn quốc</p>
                         </div>
                     </div>
                     <div class="col-md-4 mb-4 mb-md-0">

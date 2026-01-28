@@ -25,8 +25,7 @@ class CartController extends Controller
             $subTotal += $item['gia'] * $item['so_luong'];
         }
 
-        // $ship_fee = $subTotal * 0.01;
-        $ship_fee = 11;
+        $ship_fee = 36000;
 
         $total = $subTotal + $ship_fee;
 
@@ -53,7 +52,6 @@ class CartController extends Controller
             $cart[$productId] = [
                 'ten' => $sanPham->ten,
                 'so_luong' => $quantity,
-                // 'gia' => isset($sanPham->gia_giam) ? $sanPham->gia_giam : $sanPham->gia,
                 'gia' => $sanPham->finalPrice(),
                 'hinh_anh' => $sanPham->main_image,
                 'slug' => $sanPham->slug,
@@ -70,5 +68,18 @@ class CartController extends Controller
         session()->put('cart', $cartNew);
 
         return redirect()->back()->with('success', 'Cập nhật giỏ hàng thành công');
+    }
+
+    public function removeCart(Request $request) {
+        $cart = session()->get('cart', []);
+        $id = $request->input('cart_id');
+
+        if(isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
+            return redirect()->back()->with('success', 'Đã xóa sản phẩm khỏi giỏ hàng');
+        }
+
+        return redirect()->back()->with('error', 'Sản phẩm không tồn tại trong giỏ hàng');
     }
 }

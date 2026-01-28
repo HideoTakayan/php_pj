@@ -25,10 +25,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
@@ -47,6 +43,7 @@ Route::post('/contact', [App\Http\Controllers\HomeController::class, 'postContac
 Route::get('/list-cart', [CartController::class, 'listCart'])->name('cart.list');
 Route::post('/add-to-cart', [CartController::class, 'addCart'])->name('cart.add');
 Route::post('/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('/remove-cart', [CartController::class, 'removeCart'])->name('cart.remove');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
@@ -56,7 +53,7 @@ Route::middleware(['auth'])->group(function () {
 
     // order
     Route::get('/don-hang', [DonHangController::class, 'index'])->name('donhangs.index');
-    Route::get('/don-hang/create', [DonHangController::class, 'create'])->name('donhangs.create');
+    Route::match(['get', 'post'], '/don-hang/create', [DonHangController::class, 'create'])->name('donhangs.create');
     Route::post('/don-hang/store', [DonHangController::class, 'store'])->name('donhangs.store');
     Route::get('/don-hang/show/{id}', [DonHangController::class, 'show'])->name('donhangs.show');
     Route::get('/don-hang/update/{id}', [DonHangController::class, 'update'])->name('donhangs.update');
@@ -102,5 +99,3 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     // Admin User Routes
     Route::resource('admin/users', \App\Http\Controllers\Admin\UserController::class)->names('admin.users');
 });
-
-// profile, post, product reviews

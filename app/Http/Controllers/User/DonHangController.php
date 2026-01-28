@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
-use function Laravel\Prompts\error;
 
 class DonHangController extends Controller
 {
@@ -51,9 +50,16 @@ class DonHangController extends Controller
         $cart = session()->get('cart', []);
         
         $selectedIds = $request->input('selected_products');
-        // Handle comma separated string (GET request) or array
-        if ($selectedIds && is_string($selectedIds)) {
-            $selectedIds = explode(',', $selectedIds);
+        
+        // Handle persistent selection via session
+        if ($selectedIds) {
+            // If it's a string (from GET), convert to array
+            if (is_string($selectedIds)) {
+                $selectedIds = explode(',', $selectedIds);
+            }
+            session()->put('checkout_selected_products', $selectedIds);
+        } else {
+            $selectedIds = session()->get('checkout_selected_products');
         }
         
         if ($selectedIds && is_array($selectedIds) && count($selectedIds) > 0) {
@@ -67,7 +73,7 @@ class DonHangController extends Controller
                 $subTotal += $item['gia'] * $item['so_luong'];
             }
 
-            $shipping = 11;
+            $shipping = 36000;
             $discount = 0;
             $couponCode = '';
 
@@ -127,7 +133,7 @@ class DonHangController extends Controller
                 foreach ($cart as $item) {
                     $subTotal += $item['gia'] * $item['so_luong'];
                 }
-                $shipping = 11;
+                $shipping = 36000;
                 $discount = 0;
 
                 if (session()->has('coupon')) {
