@@ -19,11 +19,9 @@ class SanPham extends Model
         'gia_giam',
         'tinh_trang',
         'hot',
-        'hinh_anh',
         'hinh_anh_chi_tiet',
         'so_luong',
         'danh_muc_id',
-        // 'danh_muc_id',
     ];
 
 
@@ -39,5 +37,15 @@ class SanPham extends Model
     public function wishlists()
     {
         return $this->hasMany(Wishlist::class);
+    }
+
+    public function getMainImageAttribute()
+    {
+        if (empty($this->hinh_anh_chi_tiet)) {
+            return 'assets/images/no-image.png';
+        }
+
+        $images = explode(',', $this->hinh_anh_chi_tiet);
+        return $images[0];
     }
 }

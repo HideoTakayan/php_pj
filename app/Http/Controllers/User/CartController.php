@@ -55,7 +55,7 @@ class CartController extends Controller
                 'so_luong' => $quantity,
                 // 'gia' => isset($sanPham->gia_giam) ? $sanPham->gia_giam : $sanPham->gia,
                 'gia' => $sanPham->finalPrice(),
-                'hinh_anh' => $sanPham->hinh_anh,
+                'hinh_anh' => $sanPham->main_image,
                 'slug' => $sanPham->slug,
             ];
         }

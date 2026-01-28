@@ -152,62 +152,20 @@
 
                 <div class="wg-box">
                     <fieldset>
-                        <div class="body-title mb-10">Upload images <span class="tf-color-1">*</span></div>
-                        <div class="upload-image flex-grow mb-10">
-                            @if ($sanPham->hinh_anh)
-                                <div class="item" id="imgpreview" style="">
-                                    <img src="{{ check_image_url($sanPham->hinh_anh) }}" class="effect8" alt="">
-                                </div>
-                            @endif
-                            {{-- <div id="upload-file" class="item up-load @error('hinh_anh') error @enderror">
-                                <label class="uploadfile" for="myFile">
-                                    <span class="icon">
-                                        <i class="icon-upload-cloud"></i>
-                                    </span>
-                                    <span class="body-text">Drop your images here or select <span class="tf-color">click to
-                                            browse</span></span>
-                                    <input type="file" id="myFile" name="hinh_anh" accept="image/*">
-                                </label>
-                            </div> --}}
-                        </div>
-                        @error('hinh_anh')
-                            <div class="text-tiny text-danger mt-4">{{ $message }}</div>
-                        @enderror
-                    </fieldset>
-                    {{-- @error('hinh_anh')
-                        <fieldset class="">
-                            <div class=""></div>
-                            <span class="text-danger grow fs-4 mx-3">
-                                {{ $message }}
-                            </span>
-                        </fieldset>
-                    @enderror --}}
-
-                    <fieldset>
-                        <div class="body-title mb-10">Upload Gallery Images</div>
+                        <div class="body-title mb-10">Product Images</div>
                         <div class="upload-image mb-16">
                             @if ($sanPham->hinh_anh_chi_tiet)
                                 @foreach (explode(',', $sanPham->hinh_anh_chi_tiet) as $hinh_anh)
-                                    <div id="gitems" class="item gitems">
+                                    <div class="item">
                                         <img src="{{ check_image_url($hinh_anh) }}" alt="Product Image" class="effect8">
                                     </div>
                                 @endforeach
+                            @else
+                                <div class="item">
+                                    <img src="{{ asset('assets/images/no-image.png') }}" alt="No Image" class="effect8">
+                                </div>
                             @endif
-                            {{-- <div id ="galUpload" class="item up-load @error('hinh_anh_chi_tiet') error @enderror">
-                                <label class="uploadfile" for="gFile">
-                                    <span class="icon">
-                                        <i class="icon-upload-cloud"></i>
-                                    </span>
-                                    <span class="text-tiny">Drop your images here or select <span class="tf-color">click
-                                            to browse</span></span>
-                                    <input type="file" id="gFile" name="hinh_anh_chi_tiet[]" accept="image/*"
-                                        multiple>
-                                </label>
-                            </div> --}}
                         </div>
-                        @error('hinh_anh_chi_tiet')
-                            <div class="text-tiny text-danger mt-4">{{ $message }}</div>
-                        @enderror
                     </fieldset>
                     {{-- @error('hinh_anh_chi_tiet')
                         <fieldset class="">

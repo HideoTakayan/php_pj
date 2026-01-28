@@ -31,7 +31,7 @@
                                     <td>
                                         <div class="d-flex align-items-center">
                                             @if($item->sanPham)
-                                            <img src="{{ check_image_url($item->sanPham->hinh_anh) }}" alt="{{ $item->sanPham->ten }}" width="60" class="me-3 rounded">
+                                            <img src="{{ check_image_url($item->sanPham->main_image) }}" alt="{{ $item->sanPham->ten }}" width="60" class="me-3 rounded">
                                             <div>
                                                 <h6 class="mb-0"><a href="{{ route('product.detail', $item->sanPham->slug) }}">{{ $item->sanPham->ten }}</a></h6>
                                             </div>

@@ -50,10 +50,16 @@ class ShopController extends Controller
      */
     public function product_detail($slug)
     {
-        $sanPham = SanPham::where('slug', $slug)->first();
-        $relatedProducts = SanPham::where('danh_muc_id', $sanPham->danh_muc_id)
-        ->where('slug', '!=', $slug)
-        ->get();
+        $sanPham = SanPham::with('danh_muc')->where('slug', $slug)->first();
+        
+        if (!$sanPham) {
+            abort(404, 'Sản phẩm không tồn tại');
+        }
+        
+        $relatedProducts = SanPham::with('danh_muc')
+            ->where('danh_muc_id', $sanPham->danh_muc_id)
+            ->where('slug', '!=', $slug)
+            ->get();
         if ($relatedProducts->count() < 4) {
             $additionalProducts = SanPham::where('danh_muc_id', $sanPham->danh_muc_id)
                 ->where('slug', '!=', $slug)

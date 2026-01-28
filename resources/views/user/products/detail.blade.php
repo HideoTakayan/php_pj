@@ -8,26 +8,23 @@
                 <div class="col-lg-7">
                     <div class="product-single__media" data-media-type="vertical-thumbnail">
                         <div class="product-single__image">
-                            <div class="swiper-container">
+                            <div class="swiper-container swiper-main" id="swiper-main">
                                 <div class="swiper-wrapper">
                                     @if (count($galleryImages) > 0)
                                         @foreach ($galleryImages as $image)
-                                            <div class="swiper-slide product-single__image-item h-100">
-                                                <img loading="lazy" class="h-max" src="{{ check_image_url($image) }}"
-                                                    width="674" height="550" alt="" />
-                                                {{-- <a data-fancybox="gallery" href="../images/products/product_0.html"
-                                                    data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom">
-                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <use href="#icon_zoom" />
-                                                    </svg>
-                                                </a> --}}
+                                            <div class="swiper-slide product-single__image-item">
+                                                <div style="width: 100%; height: 600px; display: flex; align-items: center; justify-content: center; background: #f8f8f8;">
+                                                    <img loading="lazy" src="{{ check_image_url($image) }}"
+                                                        style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="" />
+                                                </div>
                                             </div>
                                         @endforeach
                                     @else
-                                        <div class="swiper-slide product-single__image-item h-100">
-                                            <img loading="lazy" class="h-max" src="{{ check_image_url($sanPham->hinh_anh) }}"
-                                                width="674" height="550" alt="" />
+                                        <div class="swiper-slide product-single__image-item">
+                                            <div style="width: 100%; height: 600px; display: flex; align-items: center; justify-content: center; background: #f8f8f8;">
+                                                <img loading="lazy" src="{{ asset('assets/images/no-image.png') }}"
+                                                    style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="No image" />
+                                            </div>
                                         </div>
                                     @endif
                                 </div>
@@ -42,14 +39,15 @@
                             </div>
                         </div>
                         <div class="product-single__thumbnail">
-                            <div class="swiper-container">
-                                @foreach ($galleryImages as $image)
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide product-single__image-item"><img loading="lazy"
-                                                class="h-max" src="{{ check_image_url($image) }}" width="104"
-                                                height="104" alt="" /></div>
-                                    </div>
-                                @endforeach
+                            <div class="swiper-container swiper-thumbs" id="swiper-thumbs">
+                                <div class="swiper-wrapper">
+                                    @foreach ($galleryImages as $image)
+                                        <div class="swiper-slide product-single__image-item" style="cursor: pointer;">
+                                            <img loading="lazy" class="h-max" src="{{ check_image_url($image) }}" width="104"
+                                                height="104" alt="" style="object-fit: cover;" />
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -63,26 +61,7 @@
                         </div><!-- /.breadcrumb -->
                     </div>
                     <h1 class="product-single__name">{{ $sanPham->ten }}</h1>
-                    <div class="product-single__rating">
-                        <div class="reviews-group d-flex">
-                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_star" />
-                            </svg>
-                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_star" />
-                            </svg>
-                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_star" />
-                            </svg>
-                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_star" />
-                            </svg>
-                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_star" />
-                            </svg>
-                        </div>
-                        <span class="reviews-note text-lowercase text-secondary ms-1">8k+ đánh giá</span>
-                    </div>
+
                     <div class="product-card__price d-flex">
                         @if ($sanPham->gia_giam)
                             <span
@@ -175,11 +154,6 @@
                             href="#tab-description" role="tab" aria-controls="tab-description"
                             aria-selected="true">Mô tả</a>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link nav-link_underscore" id="tab-reviews-tab" data-bs-toggle="tab"
-                            href="#tab-reviews" role="tab" aria-controls="tab-reviews" aria-selected="false">Đánh giá
-                            (2)</a>
-                    </li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-description" role="tabpanel"
@@ -188,146 +162,7 @@
                             {!! $sanPham->mo_ta !!}
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="tab-reviews" role="tabpanel" aria-labelledby="tab-reviews-tab">
-                        <h2 class="product-single__reviews-title">Đánh giá</h2>
-                        <div class="product-single__reviews-list">
-                            <div class="product-single__reviews-item">
-                                <div class="customer-avatar">
-                                    <img loading="lazy" src="assets/images/avatar.jpg" alt="" />
-                                </div>
-                                <div class="customer-review">
-                                    <div class="customer-name">
-                                        <h6>Janice Miller</h6>
-                                        <div class="reviews-group d-flex">
-                                            <svg class="review-star" viewBox="0 0 9 9"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="review-date">April 06, 2023</div>
-                                    <div class="review-text">
-                                        <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo
-                                            minus id quod
-                                            maxime placeat facere possimus, omnis voluptas assumenda est…</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-single__reviews-item">
-                                <div class="customer-avatar">
-                                    <img loading="lazy" src="assets/images/avatar.jpg" alt="" />
-                                </div>
-                                <div class="customer-review">
-                                    <div class="customer-name">
-                                        <h6>Benjam Porter</h6>
-                                        <div class="reviews-group d-flex">
-                                            <svg class="review-star" viewBox="0 0 9 9"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="review-date">April 06, 2023</div>
-                                    <div class="review-text">
-                                        <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo
-                                            minus id quod
-                                            maxime placeat facere possimus, omnis voluptas assumenda est…</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-single__review-form">
-                            <form name="customer-review-form">
-                                <h5>Hãy là người đầu tiên đánh giá “{{ $sanPham->ten }}”</h5>
-                                <p>Email của bạn sẽ không được hiển thị. Các trường bắt buộc được đánh dấu *</p>
-                                <div class="select-star-rating">
-                                    <label>Đánh giá của bạn *</label>
-                                    <span class="star-rating">
-                                        <svg class="star-rating__star-icon" width="12" height="12" fill="#ccc"
-                                            viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M11.1429 5.04687C11.1429 4.84598 10.9286 4.76562 10.7679 4.73884L7.40625 4.25L5.89955 1.20312C5.83929 1.07589 5.72545 0.928571 5.57143 0.928571C5.41741 0.928571 5.30357 1.07589 5.2433 1.20312L3.73661 4.25L0.375 4.73884C0.207589 4.76562 0 4.84598 0 5.04687C0 5.16741 0.0870536 5.28125 0.167411 5.3683L2.60491 7.73884L2.02902 11.0871C2.02232 11.1339 2.01563 11.1741 2.01563 11.221C2.01563 11.3951 2.10268 11.5558 2.29688 11.5558C2.39063 11.5558 2.47768 11.5223 2.56473 11.4754L5.57143 9.89509L8.57813 11.4754C8.65848 11.5223 8.75223 11.5558 8.84598 11.5558C9.04018 11.5558 9.12054 11.3951 9.12054 11.221C9.12054 11.1741 9.12054 11.1339 9.11384 11.0871L8.53795 7.73884L10.9688 5.3683C11.0558 5.28125 11.1429 5.16741 11.1429 5.04687Z" />
-                                        </svg>
-                                        <svg class="star-rating__star-icon" width="12" height="12" fill="#ccc"
-                                            viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M11.1429 5.04687C11.1429 4.84598 10.9286 4.76562 10.7679 4.73884L7.40625 4.25L5.89955 1.20312C5.83929 1.07589 5.72545 0.928571 5.57143 0.928571C5.41741 0.928571 5.30357 1.07589 5.2433 1.20312L3.73661 4.25L0.375 4.73884C0.207589 4.76562 0 4.84598 0 5.04687C0 5.16741 0.0870536 5.28125 0.167411 5.3683L2.60491 7.73884L2.02902 11.0871C2.02232 11.1339 2.01563 11.1741 2.01563 11.221C2.01563 11.3951 2.10268 11.5558 2.29688 11.5558C2.39063 11.5558 2.47768 11.5223 2.56473 11.4754L5.57143 9.89509L8.57813 11.4754C8.65848 11.5223 8.75223 11.5558 8.84598 11.5558C9.04018 11.5558 9.12054 11.3951 9.12054 11.221C9.12054 11.1741 9.12054 11.1339 9.11384 11.0871L8.53795 7.73884L10.9688 5.3683C11.0558 5.28125 11.1429 5.16741 11.1429 5.04687Z" />
-                                        </svg>
-                                        <svg class="star-rating__star-icon" width="12" height="12" fill="#ccc"
-                                            viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M11.1429 5.04687C11.1429 4.84598 10.9286 4.76562 10.7679 4.73884L7.40625 4.25L5.89955 1.20312C5.83929 1.07589 5.72545 0.928571 5.57143 0.928571C5.41741 0.928571 5.30357 1.07589 5.2433 1.20312L3.73661 4.25L0.375 4.73884C0.207589 4.76562 0 4.84598 0 5.04687C0 5.16741 0.0870536 5.28125 0.167411 5.3683L2.60491 7.73884L2.02902 11.0871C2.02232 11.1339 2.01563 11.1741 2.01563 11.221C2.01563 11.3951 2.10268 11.5558 2.29688 11.5558C2.39063 11.5558 2.47768 11.5223 2.56473 11.4754L5.57143 9.89509L8.57813 11.4754C8.65848 11.5223 8.75223 11.5558 8.84598 11.5558C9.04018 11.5558 9.12054 11.3951 9.12054 11.221C9.12054 11.1741 9.12054 11.1339 9.11384 11.0871L8.53795 7.73884L10.9688 5.3683C11.0558 5.28125 11.1429 5.16741 11.1429 5.04687Z" />
-                                        </svg>
-                                        <svg class="star-rating__star-icon" width="12" height="12" fill="#ccc"
-                                            viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M11.1429 5.04687C11.1429 4.84598 10.9286 4.76562 10.7679 4.73884L7.40625 4.25L5.89955 1.20312C5.83929 1.07589 5.72545 0.928571 5.57143 0.928571C5.41741 0.928571 5.30357 1.07589 5.2433 1.20312L3.73661 4.25L0.375 4.73884C0.207589 4.76562 0 4.84598 0 5.04687C0 5.16741 0.0870536 5.28125 0.167411 5.3683L2.60491 7.73884L2.02902 11.0871C2.02232 11.1339 2.01563 11.1741 2.01563 11.221C2.01563 11.3951 2.10268 11.5558 2.29688 11.5558C2.39063 11.5558 2.47768 11.5223 2.56473 11.4754L5.57143 9.89509L8.57813 11.4754C8.65848 11.5223 8.75223 11.5558 8.84598 11.5558C9.04018 11.5558 9.12054 11.3951 9.12054 11.221C9.12054 11.1741 9.12054 11.1339 9.11384 11.0871L8.53795 7.73884L10.9688 5.3683C11.0558 5.28125 11.1429 5.16741 11.1429 5.04687Z" />
-                                        </svg>
-                                        <svg class="star-rating__star-icon" width="12" height="12" fill="#ccc"
-                                            viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M11.1429 5.04687C11.1429 4.84598 10.9286 4.76562 10.7679 4.73884L7.40625 4.25L5.89955 1.20312C5.83929 1.07589 5.72545 0.928571 5.57143 0.928571C5.41741 0.928571 5.30357 1.07589 5.2433 1.20312L3.73661 4.25L0.375 4.73884C0.207589 4.76562 0 4.84598 0 5.04687C0 5.16741 0.0870536 5.28125 0.167411 5.3683L2.60491 7.73884L2.02902 11.0871C2.02232 11.1339 2.01563 11.1741 2.01563 11.221C2.01563 11.3951 2.10268 11.5558 2.29688 11.5558C2.39063 11.5558 2.47768 11.5223 2.56473 11.4754L5.57143 9.89509L8.57813 11.4754C8.65848 11.5223 8.75223 11.5558 8.84598 11.5558C9.04018 11.5558 9.12054 11.3951 9.12054 11.221C9.12054 11.1741 9.12054 11.1339 9.11384 11.0871L8.53795 7.73884L10.9688 5.3683C11.0558 5.28125 11.1429 5.16741 11.1429 5.04687Z" />
-                                        </svg>
-                                    </span>
-                                    <input type="hidden" id="form-input-rating" value="" />
-                                </div>
-                                <div class="mb-4">
-                                    <textarea id="form-input-review" class="form-control form-control_gray" placeholder="Nội dung đánh giá" cols="30"
-                                        rows="8"></textarea>
-                                </div>
-                                <div class="form-label-fixed mb-4">
-                                    <label for="form-input-name" class="form-label">Tên *</label>
-                                    <input id="form-input-name" class="form-control form-control-md form-control_gray">
-                                </div>
-                                <div class="form-label-fixed mb-4">
-                                    <label for="form-input-email" class="form-label">Email *</label>
-                                    <input id="form-input-email" class="form-control form-control-md form-control_gray">
-                                </div>
-                                <div class="form-check mb-4">
-                                    <input class="form-check-input form-check-input_fill" type="checkbox" value=""
-                                        id="remember_checkbox">
-                                    <label class="form-check-label" for="remember_checkbox">
-                                        Lưu tên và email của tôi cho lần bình luận sau.
-                                    </label>
-                                </div>
-                                <div class="form-action">
-                                    <button type="submit" class="btn btn-primary">Gửi</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </section>
@@ -374,9 +209,9 @@
                             <div class="swiper-slide product-card">
                                 <div class="pc__img-wrapper">
                                     <a href="{{ route('product.detail', ['slug' => $r_sp->slug]) }}">
-                                        <img loading="lazy" src="{{ check_image_url($r_sp->hinh_anh) }}" width="330"
+                                        <img loading="lazy" src="{{ check_image_url($r_sp->main_image) }}" width="330"
                                             height="400" alt="Cropped Faux leather Jacket" class="pc__img">
-                                        <img loading="lazy" src="{{ check_image_url($r_sp->hinh_anh) }}" width="330"
+                                        <img loading="lazy" src="{{ check_image_url($r_sp->main_image) }}" width="330"
                                             height="400" alt="Cropped Faux leather Jacket"
                                             class="pc__img pc__img-second">
                                     </a>
@@ -400,16 +235,7 @@
                                             <span class="money price text-red">${{ floor($r_sp->gia) }}</span>
                                         @endif
                                     </div>
-                                    <div class="product-card__review d-flex align-items-center justify-content-between">
-                                        <div class="d-flex">
-                                            <div class="reviews-group d-flex">
-                                                <svg class="review-star" viewBox="0 0 9 9"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <use href="#icon_star" />
-                                                </svg>
-                                            </div>
-                                            <span class="reviews-note text-lowercase text-secondary">8k+ đánh giá</span>
-                                        </div>
+
                                         <form action="{{ route('cart.add') }}" name="addtocart-form" method="post">
                                             @csrf
                                             <input type="hidden" name="quantity" value="1">
@@ -452,3 +278,106 @@
         </section><!-- /.products-carousel container -->
     </main>
 @endsection
+
+@section('js')
+    <style>
+        /* Hiệu ứng cho ảnh chờ ở hai bên */
+        #swiper-main .swiper-slide {
+            opacity: 0.4;
+            transform: scale(0.7);
+            transition: all 0.4s ease;
+        }
+
+        #swiper-main .swiper-slide-active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Đảm bảo container không cắt mất phần ảnh thu nhỏ */
+        #swiper-main {
+            overflow: visible !important;
+            padding: 0 10%; /* Tạo khoảng trống để lộ ảnh hai bên */
+        }
+        
+        .product-single__image {
+            overflow: hidden; /* Cắt phần thừa ra ngoài khung lớn */
+        }
+
+        /* Làm cho dải ảnh nhỏ dẹp và thanh thoát hơn */
+        .product-single__media[data-media-type="vertical-thumbnail"] {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .product-single__image {
+            flex: 1;
+            order: 2;
+        }
+
+        .product-single__thumbnail {
+            width: 80px; /* Thu hẹp độ rộng cột ảnh nhỏ */
+            order: 1;
+        }
+
+        #swiper-thumbs .product-single__image-item {
+            height: 100px !important; /* Cố định chiều cao ảnh nhỏ */
+            border: 1px solid #eee;
+            border-radius: 4px;
+            overflow: hidden;
+            opacity: 0.5;
+            transition: 0.3s;
+        }
+
+        #swiper-thumbs .swiper-slide-thumb-active {
+            opacity: 1;
+            border-color: #000;
+        }
+
+        #swiper-thumbs img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            if ($("#swiper-thumbs").length > 0 && $("#swiper-main").length > 0) {
+                var thumbsSwiper = new Swiper("#swiper-thumbs", {
+                    slidesPerView: 4,
+                    spaceBetween: 10,
+                    direction: "vertical",
+                    watchSlidesProgress: true,
+                    freeMode: true,
+                    breakpoints: {
+                        0: {
+                            direction: "horizontal",
+                            slidesPerView: 4,
+                        },
+                        992: {
+                            direction: "vertical",
+                            slidesPerView: 4,
+                        }
+                    }
+                });
+
+                new Swiper("#swiper-main", {
+                    slidesPerView: 1, /* Hiện 1 ảnh chính */
+                    centeredSlides: true, /* Đưa ảnh vào giữa */
+                    loop: true, /* Lặp vô tận để luôn thấy ảnh kế tiếp/trước đó */
+                    spaceBetween: 10,
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
+                    },
+                    thumbs: {
+                        swiper: thumbsSwiper,
+                    },
+                });
+            }
+        });
+    </script>
+@endsection
+
+

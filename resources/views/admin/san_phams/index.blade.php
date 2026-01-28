@@ -61,7 +61,7 @@
                                     <td>{{ $sp->id }}</td>
                                     <td class="pname">
                                         <div class="image">
-                                            <img src="{{ check_image_url($sp->hinh_anh) }}" alt="" class="image">
+                                            <img src="{{ check_image_url($sp->main_image) }}" alt="" class="image">
                                         </div>
                                         <div class="name text-truncate ">
                                             <a href="" class="body-title-2">{{ $sp->ten }}</a>

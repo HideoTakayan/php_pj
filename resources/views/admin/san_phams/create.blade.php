@@ -154,38 +154,9 @@
                 <div class="wg-box">
                     <fieldset>
                         <div class="body-title mb-10">Tải ảnh sản phẩm <span class="tf-color-1">*</span></div>
-                        <div class="upload-image flex-grow mb-10">
-                            <div class="item" id="imgpreview" style="display:none">
-                                <img src="" class="effect8" alt="">
-                            </div>
-                            <div id="upload-file" class="item up-load @error('hinh_anh') error @enderror">
-                                <label class="uploadfile" for="myFile">
-                                    <span class="icon">
-                                        <i class="icon-upload-cloud"></i>
-                                    </span>
-                                    <span class="body-text">Kéo thả ảnh vào đây hoặc <span class="tf-color">chọn ảnh</span></span>
-                                            
-                                    <input type="file" id="myFile" name="hinh_anh" accept="image/*">
-                                </label>
-                            </div>
-                        </div>
-                        @error('hinh_anh')
-                            <div class="text-tiny text-danger mt-4">{{ $message }}</div>
-                        @enderror
-                    </fieldset>
-                    {{-- @error('hinh_anh')
-                        <fieldset class="">
-                            <div class=""></div>
-                            <span class="text-danger grow fs-4 mx-3">
-                                {{ $message }}
-                            </span>
-                        </fieldset>
-                    @enderror --}}
-
-                    <fieldset>
-                        <div class="body-title mb-10">Tải thư viện ảnh</div>
+                        <div class="body-text mb-10">Tải lên nhiều ảnh sản phẩm. Ảnh đầu tiên sẽ là ảnh đại diện.</div>
                         <div class="upload-image mb-16">
-                            <div id ="galUpload" class="item up-load @error('hinh_anh_chi_tiet') error @enderror">
+                            <div id="galUpload" class="item up-load @error('hinh_anh_chi_tiet') error @enderror">
                                 <label class="uploadfile" for="gFile">
                                     <span class="icon">
                                         <i class="icon-upload-cloud"></i>
@@ -201,14 +172,6 @@
                             <div class="text-tiny text-danger mt-4">{{ $message }}</div>
                         @enderror
                     </fieldset>
-                    {{-- @error('hinh_anh_chi_tiet')
-                        <fieldset class="">
-                            <div class=""></div>
-                            <span class="text-danger grow fs-4 mx-3">
-                                {{ $message }}
-                            </span>
-                        </fieldset>
-                    @enderror --}}
                     <div class="cols gap22">
                         <fieldset class="name">
                             <div class="body-title mb-10">Giá niêm yết <span class="tf-color-1">*</span></div>
@@ -337,33 +300,8 @@
 @push('scripts')
     <script>
         $(function() {
-            // CKEDITOR.replace('mo_ta');
-            // if (typeof CKEDITOR !== 'undefined') {
-            //     for (var instance in CKEDITOR.instances) {
-            //         if (CKEDITOR.instances.hasOwnProperty(instance)) {
-            //             CKEDITOR.instances[instance].config.versionCheck = false;
-            //         }
-            //     }
-            // }
-            // ClassicEditor
-            //     .create(document.querySelector('#mo_ta'))
-            //     .catch(error => {
-            //         console.error(error);
-            //     });
-
-            $("#myFile").on("change", function(e) {
-                const photoInp = $("#myFile");
-                const [file] = this.files;
-                if (file) {
-                    $("#imgpreview img").attr('src', URL.createObjectURL(file));
-                    $("#imgpreview").show();
-                }
-            });
-
-
             $("#gFile").on("change", function(e) {
-                // $(".gitems").remove();
-                const photoInp = $("gFile");
+                $(".gitems").remove();
                 const gphotos = this.files;
                 $.each(gphotos, function(key, val) {
                     $("#galUpload").prepend(
@@ -371,7 +309,6 @@
                     );
                 });
             });
-
 
             $("input[name='ten']").on("change", function() {
                 $("input[name='slug']").val(StringToSlug($(this).val()));

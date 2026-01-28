@@ -25,11 +25,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $sanphams = SanPham::query()->paginate(8);
         $danhmucs = DanhMuc::all();
-        $hots = SanPham::query()->where('hot', 1)->get();
-        $sales = SanPham::query()->where('gia_giam', '<>', 'NULL')->paginate(2);
-        return view('includes.home', compact('sanphams', 'danhmucs', 'hots', 'sales'));
+        // Sản phẩm nổi bật: những sản phẩm được tích "hot" trong admin
+        $featuredProducts = SanPham::query()->where('hot', 1)->take(8)->get();
+        // Khuyến mãi hot: những sản phẩm có giá giảm
+        $hotDeals = SanPham::query()->whereNotNull('gia_giam')->take(8)->get();
+        // Banner khuyến mãi (lấy 2 sản phẩm đang giảm giá)
+        $promoBanners = SanPham::query()->whereNotNull('gia_giam')->paginate(2);
+        
+        return view('includes.home', compact('danhmucs', 'featuredProducts', 'hotDeals', 'promoBanners'));
     }
 
     public function about()

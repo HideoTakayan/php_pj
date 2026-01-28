@@ -42,9 +42,8 @@ class UpdateSanPhamRequest extends FormRequest
             'gia_giam' => 'nullable|numeric|lt:gia',
             'tinh_trang' => 'required|string',
             'hot' => 'nullable|boolean',
-            'hinh_anh' => 'nullable|image|max:2048',
-            // 'hinh_anh_chi_tiet' => 'nullable|image',
-            'hinh_anh_chi_tiet.*' => 'nullable|image',
+            'hinh_anh_chi_tiet' => 'nullable|array',
+            'hinh_anh_chi_tiet.*' => 'image|max:2048',
             'so_luong' => 'required|integer',
             'danh_muc_id' => 'required|exists:danh_mucs,id',
         ];

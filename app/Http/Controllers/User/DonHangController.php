@@ -211,7 +211,7 @@ class DonHangController extends Controller
                     "ten" => $sp->ten,
                     "so_luong" => $detail->so_luong,
                     "gia" => $sp->gia_giam ?: $sp->gia,
-                    "hinh_anh" => $sp->hinh_anh,
+                    "hinh_anh" => $sp->main_image,
                     "slug" => $sp->slug
                 ];
             }
@@ -263,7 +263,7 @@ class DonHangController extends Controller
             return redirect()->back()->with('error', 'Mã giảm giá không tồn tại');
         }
 
-        if ($coupon->expiry_date && $coupon->expiry_date->isPast()) {
+        if ($coupon->expiry_date && $coupon->expiry_date < now()) {
             return redirect()->back()->with('error', 'Mã giảm giá đã hết hạn');
         }
 

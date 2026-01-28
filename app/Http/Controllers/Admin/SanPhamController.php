@@ -45,22 +45,15 @@ class SanPhamController extends Controller
     {
         $data = $request->except('hinh_anh_chi_tiet');
 
-        if ($request->hasFile('hinh_anh')) {
-            $data['hinh_anh'] = $request->file('hinh_anh')->store('uploads/products', 'public');
-        }
-
-
-
         if ($request->hasFile('hinh_anh_chi_tiet')) {
             $galleryImages = [];
-            $counter = 1;
 
             foreach ($request->file('hinh_anh_chi_tiet') as $file) {
-                $imageName = $file->store('uploads/products/gallery', 'public');
+                $imageName = $file->store('uploads/products', 'public');
                 $galleryImages[] = $imageName;
-                $counter++;
             }
-
+            
+            // Lưu tất cả ảnh vào gallery
             $data['hinh_anh_chi_tiet'] = implode(',', $galleryImages);
         }
 
@@ -95,27 +88,21 @@ class SanPhamController extends Controller
     {
         $data = $request->except('hinh_anh_chi_tiet');
 
-
-        if ($request->hasFile('hinh_anh')) {
-            Storage::disk('public')->delete($sanPham->hinh_anh);
-            $data['hinh_anh'] = $request->file('hinh_anh')->store('uploads/products', 'public');
-        }
-
-
-
         if ($request->hasFile('hinh_anh_chi_tiet')) {
-
-            $galleryImages = explode(',', $sanPham->hinh_anh_chi_tiet);
-            foreach ($galleryImages as $image) {
+            // Xóa ảnh cũ
+            $oldGalleryImages = explode(',', $sanPham->hinh_anh_chi_tiet);
+            foreach ($oldGalleryImages as $image) {
                 if (Storage::disk('public')->exists($image)) {
                     Storage::disk('public')->delete($image);
                 }
             }
 
+            // Upload ảnh mới
             $newGalleryImages = [];
             foreach ($request->file('hinh_anh_chi_tiet') as $file) {
-                $newGalleryImages[] = $file->store('uploads/products/gallery', 'public');
+                $newGalleryImages[] = $file->store('uploads/products', 'public');
             }
+            
             $data['hinh_anh_chi_tiet'] = implode(',', $newGalleryImages);
         }
 
@@ -129,16 +116,13 @@ class SanPhamController extends Controller
      */
     public function destroy(SanPham $sanPham)
     {
+        if (!empty($sanPham->hinh_anh_chi_tiet)) {
+            $galleryImages = explode(',', $sanPham->hinh_anh_chi_tiet);
 
-        if (Storage::disk('public')->exists($sanPham->hinh_anh)) {
-            Storage::disk('public')->delete($sanPham->hinh_anh);
-        }
-
-        $galleryImages = explode(',', $sanPham->hinh_anh_chi_tiet);
-
-        foreach ($galleryImages as $image) {
-            if (Storage::disk('public')->exists($image)) {
-                Storage::disk('public')->delete($image);
+            foreach ($galleryImages as $image) {
+                if (Storage::disk('public')->exists($image)) {
+                    Storage::disk('public')->delete($image);
+                }
             }
         }
 

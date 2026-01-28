@@ -25,7 +25,7 @@
                                                             <div class="swiper-wrapper">
                                                                 <div class="swiper-slide">
                                                                     <a href="{{ route('product.detail', ['slug' => $item->product->slug]) }}">
-                                                                        <img loading="lazy" src="{{ asset('assets/images/products/' . $item->product->image) }}" width="330" height="400" alt="{{ $item->product->name }}" class="pc__img">
+                                                                        <img loading="lazy" src="{{ check_image_url($item->product->main_image) }}" width="330" height="400" alt="{{ $item->product->ten }}" class="pc__img">
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -42,10 +42,10 @@
                                                     </div>
         
                                                     <div class="pc__info position-relative">
-                                                        <p class="pc__category">{{ $item->product->category->name }}</p>
-                                                        <h6 class="pc__title"><a href="{{ route('product.detail', ['slug' => $item->product->slug]) }}">{{ $item->product->name }}</a></h6>
+                                                        <p class="pc__category">{{ $item->product->danh_muc->ten }}</p>
+                                                        <h6 class="pc__title"><a href="{{ route('product.detail', ['slug' => $item->product->slug]) }}">{{ $item->product->ten }}</a></h6>
                                                         <div class="product-card__price d-flex">
-                                                            <span class="money price">{{ number_format($item->product->regular_price, 2) }} $</span>
+                                                            <span class="money price">{{ number_format($item->product->gia, 2) }} $</span>
                                                         </div>
                                                     </div>
                                                 </div>

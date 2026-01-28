@@ -145,13 +145,13 @@
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
                                                 <a href="{{ route('product.detail', ['slug' => $sp->slug]) }}"><img
-                                                        loading="lazy" src="{{ check_image_url($sp->hinh_anh) }}"
+                                                        loading="lazy" src="{{ check_image_url($sp->main_image) }}"
                                                         width="330" height="400" alt="Cropped Faux leather Jacket"
                                                         class="pc__img"></a>
                                             </div>
                                             <div class="swiper-slide">
                                                 <a href="{{ route('product.detail', ['slug' => $sp->slug]) }}"><img
-                                                        loading="lazy" src="{{ check_image_url($sp->hinh_anh) }}"
+                                                        loading="lazy" src="{{ check_image_url($sp->main_image) }}"
                                                         width="330" height="400" alt="Cropped Faux leather Jacket"
                                                         class="pc__img"></a>
                                             </div>
@@ -185,21 +185,12 @@
                                             <span class="money price text-red">${{ floor($sp->gia) }}</span>
                                         @endif
                                     </div>
-                                    <div class="product-card__review d-flex align-items-center justify-content-between">
-                                        <div class="d-flex">
-                                            <div class="reviews-group d-flex">
-                                                <svg class="review-star" viewBox="0 0 9 9"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <use href="#icon_star" />
-                                                </svg>
-                                            </div>
-                                            <span class="reviews-note text-lowercase text-secondary">8k+ đánh giá</span>
-                                        </div>
-                                        <form action="{{ route('cart.add') }}" name="addtocart-form" method="post">
+                                    <div class="mt-3">
+                                        <form action="{{ route('cart.add') }}" method="post">
                                             @csrf
                                             <input type="hidden" name="quantity" value="1">
                                             <input type="hidden" name="product_id" value="{{ $sp->id }}">
-                                            <button type="submit" class="btn btn-primary btn-buynow">Thêm vào giỏ</button>
+                                            <button type="submit" class="btn btn-primary w-100 py-2 fs-6">Thêm vào giỏ</button>
                                         </form>
                                     </div>
 
