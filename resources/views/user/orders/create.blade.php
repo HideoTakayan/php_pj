@@ -88,7 +88,7 @@
                                                     {{ $item['ten'] }} x {{ $item['so_luong'] }}
                                                 </td>
                                                 <td align="right">
-                                                    {{ number_format($item['gia'] * $item['so_luong']) }}đ
+                                                    {{ number_format($item['gia'] * $item['so_luong'], 0, ',', '.') }}đ
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -99,14 +99,14 @@
                                         <tr>
                                             <th>TẠM TÍNH</th>
                                             <td align="right">
-                                                {{ number_format($subTotal) }}đ
+                                                {{ number_format($subTotal, 0, ',', '.') }}đ
                                                 <input type="hidden" name="tien_hang" value="{{ $subTotal }}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>PHÍ VẬN CHUYỂN</th>
                                             <td align="right">
-                                                {{ number_format($shipping) }}đ
+                                                {{ number_format($shipping, 0, ',', '.') }}đ
                                                 <input type="hidden" name="tien_ship" value="{{ $shipping }}">
                                             </td>
                                         </tr>
@@ -114,7 +114,7 @@
                                         <tr>
                                             <th class="text-success">GIẢM GIÁ ({{ $couponCode }})</th>
                                             <td align="right" class="text-success">
-                                                -{{ number_format($discount) }}đ
+                                                -{{ number_format($discount, 0, ',', '.') }}đ
                                                 <input type="hidden" name="tien_giam_gia" value="{{ $discount }}">
                                             </td>
                                         </tr>
@@ -122,7 +122,7 @@
                                         <tr>
                                             <th>TỔNG CỘNG</th>
                                             <td align="right" class="text-red">
-                                                <b>{{ number_format($total) }}đ</b>
+                                                <b>{{ number_format($total, 0, ',', '.') }}đ</b>
                                                 <input type="hidden" name="tong_tien" value="{{ $total }}">
                                             </td>
                                         </tr>
@@ -137,7 +137,7 @@
                                         </div>
                                     @else
                                         <div class="alert alert-success d-flex justify-content-between align-items-center p-2 mb-0">
-                                            <small>Mã <strong>{{ session('coupon.code') }}</strong> ({{ number_format($discount) }}đ) đã áp dụng</small>
+                                            <small>Mã <strong>{{ session('coupon.code') }}</strong> ({{ number_format($discount, 0, ',', '.') }}đ) đã áp dụng</small>
                                             <a href="{{ route('donhangs.coupon.remove') }}" class="text-danger fw-bold small ms-2">Gỡ bỏ</a>
                                         </div>
                                     @endif

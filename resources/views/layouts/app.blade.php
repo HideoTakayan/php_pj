@@ -44,17 +44,27 @@
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     @yield('js')
+    <div id="flash-messages" style="display: none;"
+        data-success="{{ Session::get('success') }}"
+        data-error="{{ Session::get('error') }}"
+        data-info="{{ Session::get('info') }}">
+    </div>
     <script>
         $(document).ready(function() {
-            @if(Session::has('success'))
-                toastr.success("{{ Session::get('success') }}");
-            @endif
-            @if(Session::has('error'))
-                toastr.error("{{ Session::get('error') }}");
-            @endif
-            @if(Session::has('info'))
-                toastr.info("{{ Session::get('info') }}");
-            @endif
+            var flashStore = document.getElementById('flash-messages');
+            var successMessage = flashStore.getAttribute('data-success');
+            var errorMessage = flashStore.getAttribute('data-error');
+            var infoMessage = flashStore.getAttribute('data-info');
+
+            if (successMessage) {
+                toastr.success(successMessage);
+            }
+            if (errorMessage) {
+                toastr.error(errorMessage);
+            }
+            if (infoMessage) {
+                toastr.info(infoMessage);
+            }
         });
     </script>
 </body>

@@ -68,8 +68,8 @@
                                             <div class="text-truncate text-tiny mt-3">{{ $sp->slug }}</div>
                                         </div>
                                     </td>
-                                    <td>{{ $sp->gia }}</td>
-                                    <td>{{ $sp->gia_giam == null ? 'Không có' : $sp->gia_giam }}</td>
+                                    <td>{{ number_format($sp->gia, 0, ',', '.') }}đ</td>
+                                    <td>{{ $sp->gia_giam == null ? 'Không có' : number_format($sp->gia_giam, 0, ',', '.') . 'đ' }}</td>
                                     <td class="text-truncate ">{{ $sp->ma_sp }}</td>
                                     <td class="text-truncate">{{ $sp->danh_muc->ten }}</td>
                                     {{-- <td>Brand2</td> --}}

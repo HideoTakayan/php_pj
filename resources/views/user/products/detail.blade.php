@@ -65,10 +65,10 @@
                     <div class="product-card__price d-flex">
                         @if ($sanPham->gia_giam)
                             <span
-                                class="price me-1 pc__category text-decoration-line-through fs-3">${{ floor($sanPham->gia) }}</span>
-                            <span class="money price text-red fs-3">${{ floor($sanPham->gia_giam) }}</span>
+                                class="price me-1 pc__category text-decoration-line-through fs-3">{{ number_format($sanPham->gia, 0, ',', '.') }}đ</span>
+                            <span class="money price text-red fs-3">{{ number_format($sanPham->gia_giam, 0, ',', '.') }}đ</span>
                         @else
-                            <span class="money price text-red fs-3">${{ floor($sanPham->gia) }}</span>
+                            <span class="money price text-red fs-3">{{ number_format($sanPham->gia, 0, ',', '.') }}đ</span>
                         @endif
                     </div>
                     <div class="product-single__short-desc">
@@ -210,48 +210,46 @@
                                 <div class="pc__img-wrapper">
                                     <a href="{{ route('product.detail', ['slug' => $r_sp->slug]) }}">
                                         <img loading="lazy" src="{{ check_image_url($r_sp->main_image) }}" width="330"
-                                            height="400" alt="Cropped Faux leather Jacket" class="pc__img">
+                                            height="400" alt="{{ $r_sp->ten }}" class="pc__img">
                                         <img loading="lazy" src="{{ check_image_url($r_sp->main_image) }}" width="330"
-                                            height="400" alt="Cropped Faux leather Jacket"
+                                            height="400" alt="{{ $r_sp->ten }}"
                                             class="pc__img pc__img-second">
                                     </a>
-                                    {{-- <button
-                                        class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
-                                        data-aside="cartDrawer" title="Add To Cart">Add To Cart</button> --}}
                                 </div>
 
                                 <div class="pc__info position-relative">
                                     <p class="pc__category">{{ $r_sp->danh_muc->ten }}</p>
-                                    <h6 class="pc__title text-truncate"><a
-                                            href="{{ route('product.detail', ['slug' => $r_sp->slug]) }}">{{ $r_sp->ten }}</a>
-                                        {{-- <a href="{{ route('product.detail', ['slug' => $r_sp->slug]) }}">detail</a> --}}
+                                    <h6 class="pc__title text-truncate">
+                                        <a href="{{ route('product.detail', ['slug' => $r_sp->slug]) }}">{{ $r_sp->ten }}</a>
                                     </h6>
                                     <div class="product-card__price d-flex">
                                         @if ($r_sp->gia_giam)
                                             <span
-                                                class="price me-1 pc__category text-decoration-line-through">${{ floor($r_sp->gia) }}</span>
-                                            <span class="money price text-red">${{ floor($r_sp->gia_giam) }}</span>
+                                                class="price me-1 pc__category text-decoration-line-through">{{ number_format($r_sp->gia, 0, ',', '.') }}đ</span>
+                                            <span class="money price text-red">{{ number_format($r_sp->gia_giam, 0, ',', '.') }}đ</span>
                                         @else
-                                            <span class="money price text-red">${{ floor($r_sp->gia) }}</span>
+                                            <span class="money price text-red">{{ number_format($r_sp->gia, 0, ',', '.') }}đ</span>
                                         @endif
                                     </div>
 
-                                        <form action="{{ route('cart.add') }}" name="addtocart-form" method="post">
+                                    <div class="mt-2">
+                                        <form action="{{ route('cart.add') }}" method="post">
                                             @csrf
                                             <input type="hidden" name="quantity" value="1">
                                             <input type="hidden" name="product_id" value="{{ $r_sp->id }}">
-                                            <button type="submit" class="btn btn-primary btn-buynow">Thêm vào giỏ</button>
+                                            <button type="submit" class="btn btn-primary w-100 py-2 fs-6">Thêm vào giỏ</button>
                                         </form>
                                     </div>
 
-                                    <button
-                                        class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
-                                        title="Thêm vào yêu thích">
-                                        <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <use href="#icon_heart" />
-                                        </svg>
-                                    </button>
+                                    <form action="{{ route('wishlist.add') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $r_sp->id }}">
+                                        <button type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist" title="Thêm vào yêu thích">
+                                            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <use href="#icon_heart" />
+                                            </svg>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         @endforeach

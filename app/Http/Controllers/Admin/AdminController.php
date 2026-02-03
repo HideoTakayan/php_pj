@@ -24,12 +24,59 @@ class AdminController extends Controller
 
         $recentOrders = DonHang::latest()->take(5)->get();
 
+        // Monthly data for chart
+        $monthlyData = DonHang::selectRaw('MONTH(created_at) as month, SUM(tong_tien) as revenue, COUNT(*) as orders,
+            SUM(CASE WHEN trang_thai_don_hang = "cho_xac_nhan" THEN tong_tien ELSE 0 END) as pending,
+            SUM(CASE WHEN trang_thai_don_hang = "da_giao_hang" THEN tong_tien ELSE 0 END) as delivered,
+            SUM(CASE WHEN trang_thai_don_hang = "huy_don_hang" THEN tong_tien ELSE 0 END) as cancelled')
+            ->whereYear('created_at', date('Y'))
+            ->groupBy('month')
+            ->get()
+            ->keyBy('month');
+
+        $monthlyRevenue = [];
+        $monthlyOrders = [];
+        $monthlyPendingArr = [];
+        $monthlyDeliveredArr = [];
+        $monthlyCancelledArr = [];
+
+        for ($i = 1; $i <= 12; $i++) {
+            $monthlyRevenue[] = $monthlyData->has($i) ? $monthlyData[$i]->revenue : 0;
+            $monthlyOrders[] = $monthlyData->has($i) ? $monthlyData[$i]->orders : 0;
+            $monthlyPendingArr[] = $monthlyData->has($i) ? $monthlyData[$i]->pending : 0;
+            $monthlyDeliveredArr[] = $monthlyData->has($i) ? $monthlyData[$i]->delivered : 0;
+            $monthlyCancelledArr[] = $monthlyData->has($i) ? $monthlyData[$i]->cancelled : 0;
+        }
+
+        // Rolling 30-day stats for growth
+        $now = now();
+        $startOfLast30Days = $now->copy()->subDays(30);
+        $startOfPrev30Days = $now->copy()->subDays(60);
+
+        $current30DaysRevenue = DonHang::where('created_at', '>=', $startOfLast30Days)->sum('tong_tien');
+        $prev30DaysRevenue = DonHang::where('created_at', '>=', $startOfPrev30Days)
+            ->where('created_at', '<', $startOfLast30Days)
+            ->sum('tong_tien');
+        $revenueGrowth = $prev30DaysRevenue > 0 ? (($current30DaysRevenue - $prev30DaysRevenue) / $prev30DaysRevenue) * 100 : ($current30DaysRevenue > 0 ? 100 : 0);
+
+        $current30DaysOrders = DonHang::where('created_at', '>=', $startOfLast30Days)->count();
+        $prev30DaysOrders = DonHang::where('created_at', '>=', $startOfPrev30Days)
+            ->where('created_at', '<', $startOfLast30Days)
+            ->count();
+        $ordersGrowth = $prev30DaysOrders > 0 ? (($current30DaysOrders - $prev30DaysOrders) / $prev30DaysOrders) * 100 : ($current30DaysOrders > 0 ? 100 : 0);
+
+        $yearRevenue = array_sum($monthlyRevenue);
+        $yearOrders = array_sum($monthlyOrders);
+
         return view('admin.index', compact(
             'totalOrders', 'totalRevenue',
             'pendingOrders', 'pendingRevenue',
             'deliveredOrders', 'deliveredRevenue',
             'cancelledOrders', 'cancelledRevenue',
-            'recentOrders'
+            'recentOrders',
+            'monthlyRevenue', 'monthlyOrders', 'monthlyPendingArr', 'monthlyDeliveredArr', 'monthlyCancelledArr',
+            'revenueGrowth', 'ordersGrowth',
+            'yearRevenue', 'yearOrders'
         ));
     }
 

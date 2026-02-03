@@ -25,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $sliders = \App\Models\Slider::where('status', 1)->limit(3)->get();
         $danhmucs = DanhMuc::all();
         // Sản phẩm nổi bật: những sản phẩm được tích "hot" trong admin
         $featuredProducts = SanPham::query()->where('hot', 1)->take(8)->get();
@@ -33,7 +34,7 @@ class HomeController extends Controller
         // Banner khuyến mãi (lấy 2 sản phẩm đang giảm giá)
         $promoBanners = SanPham::query()->whereNotNull('gia_giam')->paginate(2);
         
-        return view('includes.home', compact('danhmucs', 'featuredProducts', 'hotDeals', 'promoBanners'));
+        return view('includes.home', compact('sliders', 'danhmucs', 'featuredProducts', 'hotDeals', 'promoBanners'));
     }
 
     public function about()
@@ -55,8 +56,7 @@ class HomeController extends Controller
             'describe' => 'required'
         ]);
 
-        // Logic lưu liên hệ hoặc gửi mail có thể thêm ở đây
-        // Ví dụ: LienHe::create($request->all());
+        \App\Models\LienHe::create($request->all());
 
         return redirect()->back()->with('success', 'Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi sớm nhất!');
     }

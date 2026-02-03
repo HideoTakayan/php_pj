@@ -65,7 +65,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="shopping-cart__product-price text-red">${{ number_format($item['gia']) }}</span>
+                                            <span class="shopping-cart__product-price text-red">{{ number_format($item['gia'], 0, ',', '.') }}đ</span>
                                         </td>
                                         <td>
                                             <div class="qty-control position-relative">
@@ -77,7 +77,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="shopping-cart__subtotal text-red">${{ number_format($item['gia'] * $item['so_luong']) }}</span>
+                                            <span class="shopping-cart__subtotal text-red">{{ number_format($item['gia'] * $item['so_luong'], 0, ',', '.') }}đ</span>
                                         </td>
                                         <td>
                                             <a href="javascript:void(0)" class="remove-cart-item text-danger" data-id="{{ $key }}">
@@ -101,18 +101,18 @@
                                     <tbody>
                                         <tr>
                                             <th>Tạm tính</th>
-                                            <td class="text-red">${{ number_format($subTotal) }}</td>
+                                            <td class="text-red">{{ number_format($subTotal, 0, ',', '.') }}đ</td>
                                         </tr>
                                         <tr>
                                             <th>Phí vận chuyển</th>
                                             <td>
-                                                <div class="text-red fw-bold">${{ number_format($ship_fee) }}</div>
+                                                <div class="text-red fw-bold">{{ number_format($ship_fee, 0, ',', '.') }}đ</div>
                                                 <div class="small">Vận chuyển toàn quốc</div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Tổng cộng</th>
-                                            <td class="text-red fs-4"><strong>${{ number_format($total) }}</strong></td>
+                                            <td class="text-red fs-4"><strong>{{ number_format($total, 0, ',', '.') }}đ</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -40,30 +40,30 @@
                                             @endif
                                         </div>
                                     </td>
-                                    <td>${{ number_format($item->don_gia) }}</td>
+                                    <td>{{ number_format($item->don_gia, 0, ',', '.') }}đ</td>
                                     <td>{{ $item->so_luong }}</td>
-                                    <td class="text-end">${{ number_format($item->thanh_tien) }}</td>
+                                    <td class="text-end">{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</td>
                                 </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <td colspan="3" class="text-end fw-bold">Tạm tính:</td>
-                                    <td class="text-end">${{ number_format($order->tien_hang) }}</td>
+                                    <td class="text-end">{{ number_format($order->tien_hang, 0, ',', '.') }}đ</td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="text-end fw-bold">Phí vận chuyển:</td>
-                                    <td class="text-end">${{ number_format($order->tien_ship) }}</td>
+                                    <td class="text-end">{{ number_format($order->tien_ship, 0, ',', '.') }}đ</td>
                                 </tr>
                                 @if($order->tien_giam_gia > 0)
                                 <tr>
                                     <td colspan="3" class="text-end fw-bold text-success">Giảm giá:</td>
-                                    <td class="text-end text-success">-${{ number_format($order->tien_giam_gia) }}</td>
+                                    <td class="text-end text-success">-{{ number_format($order->tien_giam_gia, 0, ',', '.') }}đ</td>
                                 </tr>
                                 @endif
                                 <tr>
                                     <td colspan="3" class="text-end fw-bold fs-5">Tổng cộng:</td>
-                                    <td class="text-end fw-bold fs-5 text-red">${{ number_format($order->tong_tien) }}</td>
+                                    <td class="text-end fw-bold fs-5 text-red">{{ number_format($order->tong_tien, 0, ',', '.') }}đ</td>
                                 </tr>
                             </tfoot>
                         </table>

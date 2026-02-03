@@ -43,7 +43,7 @@
                                     <th>Liên hệ</th>
                                     <th class="text-center">Vai trò</th>
                                     <th class="text-center">Ngày tham gia</th>
-                                    {{-- <th>Hành động</th> --}}
+                                    <th class="text-center">Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,9 +68,17 @@
                                             @endif
                                         </td>
                                         <td class="text-center">{{ $user->created_at->format('d/m/Y') }}</td>
-                                        {{-- <td>
-                                            <!-- Actions if needed -->
-                                        </td> --}}
+                                        <td class="text-center">
+                                            @if($user->id !== auth()->id())
+                                            <form action="{{ route('admin.users.destroy', ['user' => $user->id]) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="item text-danger delete">
+                                                    <i class="icon-trash-2"></i>
+                                                </div>
+                                            </form>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -85,3 +93,28 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(function() {
+        $('.delete').on('click', function(e) {
+            e.preventDefault();
+            var form = $(this).closest('form');
+            Swal.fire({
+                title: 'Bạn có chắc chắn?',
+                text: "Bạn sẽ không thể hoàn tác hành động này!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Đồng ý, xóa!',
+                cancelButtonText: 'Hủy'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
+        });
+    });
+</script>
+@endpush

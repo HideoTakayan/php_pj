@@ -62,22 +62,20 @@
                         <div id="accordion-filter-price" class="accordion-collapse collapse show border-0"
                             aria-labelledby="accordion-heading-price" data-bs-parent="#price-filters">
                             <input class="price-range-slider" type="text" name="price_range" value=""
-                                data-slider-min="0" data-slider-max="1000" data-slider-step="5"
-                                data-slider-value="[{{ request('price_min', 0) }},{{ request('price_max', 1000) }}]"
-                                data-currency="$" />
+                                data-slider-min="0" data-slider-max="10000000" data-slider-step="100000"
+                                data-slider-value="[{{ request('min_price', 0) }},{{ request('max_price', 10000000) }}]"
+                                data-currency="đ" />
                             <div class="price-range__info d-flex align-items-center mt-2">
                                 <div class="me-auto">
                                     <span class="text-secondary">Thấp nhất: </span>
-                                    <span class="price-range__min">${{ request('min_price') }}</span>
+                                    <span class="price-range__min">{{ number_format(request('min_price', 0), 0, ',', '.') }}đ</span>
                                 </div>
                                 <div>
                                     <span class="text-secondary">Cao nhất: </span>
-                                    <span class="price-range__max">{{ request('max_price') }}</span>
+                                    <span class="price-range__max">{{ number_format(request('max_price', 10000000), 0, ',', '.') }}đ</span>
                                 </div>
                             </div>
-                            <a href="{{ request()->fullUrlWithQuery(['price_range' => request('price_range')]) }}">
-                                <button class="btn btn-primary btn-buynow mt-3">Lọc theo giá</button>
-                            </a>
+                            <button class="btn btn-primary btn-buynow mt-3">Lọc theo giá</button>
                         </div>
                     </div>
                 </div>
@@ -179,10 +177,10 @@
                                     <div class="product-card__price d-flex">
                                         @if ($sp->gia_giam)
                                             <span
-                                                class="price me-1 pc__category text-decoration-line-through">${{ floor($sp->gia) }}</span>
-                                            <span class="money price text-red">${{ floor($sp->gia_giam) }}</span>
+                                                class="price me-1 pc__category text-decoration-line-through">{{ number_format($sp->gia, 0, ',', '.') }}đ</span>
+                                            <span class="money price text-red">{{ number_format($sp->gia_giam, 0, ',', '.') }}đ</span>
                                         @else
-                                            <span class="money price text-red">${{ floor($sp->gia) }}</span>
+                                            <span class="money price text-red">{{ number_format($sp->gia, 0, ',', '.') }}đ</span>
                                         @endif
                                     </div>
                                     <div class="mt-3">
@@ -261,3 +259,26 @@
         </section>
     </main>
 @endsection
+
+@push('scripts')
+<script>
+    $(function() {
+        // Slider initialization is handled by theme.js (initRangeSlider)
+        // We only handle the filtering action here
+
+        $('.btn-buynow').on('click', function(e) {
+            e.preventDefault();
+            var range = $(".price-range-slider").val().split(',');
+            var min = range[0];
+            var max = range[1];
+            
+            var url = new URL(window.location.href);
+            url.searchParams.set('min_price', min);
+            url.searchParams.set('max_price', max);
+            url.searchParams.delete('page'); // Reset pagination
+            
+            window.location.href = url.toString();
+        });
+    });
+</script>
+@endpush

@@ -45,7 +45,7 @@
                                                         <p class="pc__category">{{ $item->product->danh_muc->ten }}</p>
                                                         <h6 class="pc__title"><a href="{{ route('product.detail', ['slug' => $item->product->slug]) }}">{{ $item->product->ten }}</a></h6>
                                                         <div class="product-card__price d-flex">
-                                                            <span class="money price">{{ number_format($item->product->gia, 2) }} $</span>
+                                                            <span class="money price text-red">{{ number_format($item->product->gia, 0, ',', '.') }}đ</span>
                                                         </div>
                                                     </div>
                                                 </div>

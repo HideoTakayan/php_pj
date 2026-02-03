@@ -147,6 +147,13 @@
                             </li>
 
                             <li class="menu-item">
+                                <a href="{{ route('admin.lien_hes.index') }}" class="">
+                                    <div class="icon"><i class="icon-mail"></i></div>
+                                    <div class="text">Liên hệ</div>
+                                </a>
+                            </li>
+
+                            <li class="menu-item">
                                 <a href="#" onclick="alert('Tính năng đang phát triển'); return false;" class="">
                                     <div class="icon"><i class="icon-settings"></i></div>
                                     <div class="text">Cài đặt</div>

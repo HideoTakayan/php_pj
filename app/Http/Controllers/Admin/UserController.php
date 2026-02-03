@@ -61,6 +61,15 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = \App\Models\User::findOrFail($id);
+        
+        // Prevent admin from deleting themselves
+        if ($user->id === auth()->id()) {
+            return back()->with('error', 'Bạn không thể tự xóa tài khoản của chính mình.');
+        }
+
+        $user->delete();
+
+        return back()->with('success', 'Thành viên đã được xóa thành công.');
     }
 }

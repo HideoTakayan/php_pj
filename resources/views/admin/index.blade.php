@@ -124,7 +124,7 @@
                                     </div>
                                     <div>
                                         <div class="body-text mb-2">Doanh thu đã hủy</div>
-                                        <h4>{{ number_format($cancelledRevenue, 2) }}</h4>
+                                        <h4>{{ number_format($cancelledRevenue, 0, ',', '.') }}đ</h4>
                                     </div>
                                 </div>
                             </div>
@@ -161,10 +161,10 @@
                                 </div>
                             </div>
                             <div class="flex items-center gap10">
-                                <h4>$0.00</h4>
-                                <div class="box-icon-trending up">
-                                    <i class="icon-trending-up"></i>
-                                    <div class="body-title number">0.00%</div>
+                                <h4>{{ number_format($yearRevenue, 0, ',', '.') }}đ</h4>
+                                <div class="box-icon-trending {{ $revenueGrowth >= 0 ? 'up' : 'down' }}">
+                                    <i class="icon-trending-{{ $revenueGrowth >= 0 ? 'up' : 'down' }}"></i>
+                                    <div class="body-title number">{{ number_format($revenueGrowth, 2) }}%</div>
                                 </div>
                             </div>
                         </div>
@@ -176,10 +176,10 @@
                                 </div>
                             </div>
                             <div class="flex items-center gap10">
-                                <h4>0</h4>
-                                <div class="box-icon-trending up">
-                                    <i class="icon-trending-up"></i>
-                                    <div class="body-title number">0.00%</div>
+                                <h4>{{ $yearOrders }}</h4>
+                                <div class="box-icon-trending {{ $ordersGrowth >= 0 ? 'up' : 'down' }}">
+                                    <i class="icon-trending-{{ $ordersGrowth >= 0 ? 'up' : 'down' }}"></i>
+                                    <div class="body-title number">{{ number_format($ordersGrowth, 2) }}%</div>
                                 </div>
                             </div>
                         </div>
@@ -224,9 +224,9 @@
                                         <td class="text-center">{{ $order->ma_don_hang }}</td>
                                         <td class="text-center">{{ $order->ten_nguoi_nhan }}</td>
                                         <td class="text-center">{{ $order->sdt_nguoi_nhan }}</td>
-                                        <td class="text-center">${{ number_format($order->tien_hang, 2) }}</td>
-                                        <td class="text-center">$0.00</td>
-                                        <td class="text-center">${{ number_format($order->tong_tien, 2) }}</td>
+                                        <td class="text-center">{{ number_format($order->tien_hang, 0, ',', '.') }}đ</td>
+                                        <td class="text-center">0đ</td>
+                                        <td class="text-center">{{ number_format($order->tong_tien, 0, ',', '.') }}đ</td>
 
                                         <td class="text-center">
                                             {{ \App\Models\DonHang::TRANG_THAI_DON_HANG[$order->trang_thai_don_hang] ?? $order->trang_thai_don_hang }}
@@ -255,4 +255,109 @@
         </div>
 
     </div>
+    <div id="chart-data-storage"
+        data-revenue="{{ json_encode($monthlyRevenue) }}"
+        data-pending="{{ json_encode($monthlyPendingArr) }}"
+        data-delivered="{{ json_encode($monthlyDeliveredArr) }}"
+        data-cancelled="{{ json_encode($monthlyCancelledArr) }}"
+        style="display:none;"></div>
 @endsection
+
+@push('scripts')
+<script>
+    (function($) {
+        var tfLineChart = (function() {
+            var chartBar = function() {
+                var storage = document.getElementById('chart-data-storage');
+                var dataRevenue = JSON.parse(storage.getAttribute('data-revenue'));
+                var dataPending = JSON.parse(storage.getAttribute('data-pending'));
+                var dataDelivered = JSON.parse(storage.getAttribute('data-delivered'));
+                var dataCancelled = JSON.parse(storage.getAttribute('data-cancelled'));
+
+                var options = {
+                    series: [{
+                            name: 'Tổng cộng',
+                            data: dataRevenue
+                        }, {
+                            name: 'Chờ xử lý',
+                            data: dataPending
+                        },
+                        {
+                            name: 'Đã giao',
+                            data: dataDelivered
+                        }, {
+                            name: 'Đã hủy',
+                            data: dataCancelled
+                        }
+                    ],
+                    chart: {
+                        type: 'bar',
+                        height: 325,
+                        toolbar: {
+                            show: false,
+                        },
+                    },
+                    plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: '10px',
+                            endingShape: 'rounded'
+                        },
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    legend: {
+                        show: false,
+                    },
+                    colors: ['#2377FC', '#FFA500', '#078407', '#FF0000'],
+                    stroke: {
+                        show: false,
+                    },
+                    xaxis: {
+                        labels: {
+                            style: {
+                                colors: '#212529',
+                            },
+                        },
+                        categories: ['Th1', 'Th2', 'Th3', 'Th4', 'Th5', 'Th6', 'Th7', 'Th8', 'Th9',
+                            'Th10', 'Th11', 'Th12'
+                        ],
+                    },
+                    yaxis: {
+                        show: false,
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function(val) {
+                                return Number(val).toLocaleString('vi-VN') + "đ"
+                            }
+                        }
+                    }
+                };
+
+                var chart = new ApexCharts(
+                    document.querySelector("#line-chart-8"),
+                    options
+                );
+                if ($("#line-chart-8").length > 0) {
+                    chart.render();
+                }
+            };
+
+            return {
+                load: function() {
+                    chartBar();
+                },
+            };
+        })();
+
+        $(window).on("load", function() {
+            tfLineChart.load();
+        });
+    })(jQuery);
+</script>
+@endpush

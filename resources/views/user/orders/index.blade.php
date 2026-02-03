@@ -61,7 +61,7 @@
                                     @endphp
                                     <span class="{{ $statusClass }}">{{ $statusLabel }}</span>
                                 </td>
-                                <td>${{ number_format($order->tong_tien) }}</td>
+                                <td>{{ number_format($order->tong_tien, 0, ',', '.') }}đ</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
                                         <a href="{{ route('donhangs.show', $order->id) }}" class="btn btn-sm btn-outline-primary">Xem chi tiết</a>

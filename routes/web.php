@@ -98,4 +98,7 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
 
     // Admin User Routes
     Route::resource('admin/users', \App\Http\Controllers\Admin\UserController::class)->names('admin.users');
+
+    // Admin Contact Routes
+    Route::get('admin/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'admin_contact'])->name('admin.lien_hes.index');
 });

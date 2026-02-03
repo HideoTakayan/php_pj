@@ -13,73 +13,36 @@
         "loop": true
     }'>
             <div class="swiper-wrapper">
+                @foreach($sliders as $slider)
                 <div class="swiper-slide">
                     <div class="overflow-hidden position-relative h-100">
                         <div class="slideshow-character position-absolute bottom-0 pos_right-center">
-                            <img loading="lazy" src="{{ asset('assets/images/slideshow-character1.webp') }}"
-                                width="542" height="733" alt="Woman Fashion 1"
-                                class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto" />
+                            {{-- Image handling: check if external URL or local storage --}}
+                            <img loading="lazy" src="{{ \Illuminate\Support\Str::startsWith($slider->image, 'http') ? $slider->image : Storage::url($slider->image) }}"
+                                width="542" height="733" alt="{{ $slider->title }}"
+                                class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto"
+                                style="max-height: 80vh; object-fit: contain;" />
+                                
+                            @if($slider->tagline)
                             <div class="character_markup type2">
-                                <p class="text-uppercase font-sofia fw-bold animate animate_fade animate_rtl animate_delay-10">Mới nhất</p>
+                                <p class="text-uppercase font-sofia fw-bold animate animate_fade animate_rtl animate_delay-10">{{ $slider->tagline }}</p>
                             </div>
+                            @endif
                         </div>
                         <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
+                            @if($slider->subtitle)
                             <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-                                Hàng mới về</h6>
-                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Thời trang Nam
-                            </h2>
-                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Thanh lịch & Hiện đại</h2>
-                            <a href="{{ route('shop.index') }}"
+                                {{ $slider->subtitle }}
+                            </h6>
+                            @endif
+                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">{{ $slider->title }}</h2>
+                            {{-- <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Theme text?</h2> --}}
+                            <a href="{{ $slider->link }}"
                                 class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Mua ngay</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="swiper-slide">
-                    <div class="overflow-hidden position-relative h-100">
-                        <div class="slideshow-character position-absolute bottom-0 pos_right-center">
-                            <img loading="lazy" src="{{ asset('assets/images/slideshow-character2.webp') }}" width="400"
-                                height="733" alt="Woman Fashion 2"
-                                class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto" />
-                            <div class="character_markup">
-                                <p class="text-uppercase font-sofia fw-bold animate animate_fade animate_rtl animate_delay-10">
-                                    Xu hướng
-                                </p>
-                            </div>
-                        </div>
-                        <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
-                            <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-                                Phong cách sống</h6>
-                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Tối giản
-                            </h2>
-                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Thoải mái mỗi ngày</h2>
-                            <a href="{{ route('shop.index') }}"
-                                class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Mua ngay</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="overflow-hidden position-relative h-100">
-                        <div class="slideshow-character position-absolute bottom-0 pos_right-center">
-                            <img loading="lazy" src="{{ asset('assets/images/slideshow-character3.webp') }}" width="400"
-                                height="690" alt="Woman Fashion 3"
-                                class="slideshow-character__img animate animate_fade animate_rtl animate_delay-10 w-auto h-auto" />
-                            <div class="character_markup type2">
-                                <p class="text-uppercase font-sofia fw-bold animate animate_fade animate_rtl animate_delay-10">Sale</p>
-                            </div>
-                        </div>
-                        <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
-                            <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-                                Khuyến mãi</h6>
-                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Ưu đãi mùa xuân
-                            </h2>
-                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Giảm đến 36%</h2>
-                            <a href="{{ route('shop.index') }}"
-                                class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Mua ngay</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
             <div class="container">
@@ -163,10 +126,10 @@
                                     </h6>
                                     <div class="product-card__price d-flex">
                                         @if ($item->gia_giam)
-                                            <span class="price me-1 pc__category text-decoration-line-through">${{ floor($item->gia) }}</span>
-                                            <span class="money price text-red">${{ floor($item->gia_giam) }}</span>
+                                            <span class="price me-1 pc__category text-decoration-line-through">{{ number_format($item->gia, 0, ',', '.') }}đ</span>
+                                            <span class="money price text-red">{{ number_format($item->gia_giam, 0, ',', '.') }}đ</span>
                                         @else
-                                            <span class="money price text-red">${{ floor($item->gia) }}</span>
+                                            <span class="money price text-red">{{ number_format($item->gia, 0, ',', '.') }}đ</span>
                                         @endif
                                     </div>
                                     <div class="mt-3">
@@ -210,7 +173,7 @@
                                     <span class="text-uppercase text-secondary tracking-widest small d-block mb-2">Deal tốt nhất</span>
                                     <h4 class="fw-bold mb-3">{{ $item->ten }}</h4>
                                     <div class="mb-4">
-                                        <span class="fs-4 fw-bold text-red">${{ floor($item->gia_giam ?? $item->gia) }}</span>
+                                        <span class="fs-4 fw-bold text-red">{{ number_format($item->gia_giam ?? $item->gia, 0, ',', '.') }}đ</span>
                                     </div>
                                     <a href="{{ route('product.detail', ['slug' => $item->slug]) }}" 
                                        class="btn btn-dark text-uppercase fs-xs fw-bold px-4 py-2">Khám phá</a>
@@ -274,10 +237,10 @@
                                                 </h6>
                                                 <div class="product-card__price d-flex">
                                                     @if ($item->gia_giam)
-                                                        <span class="price me-1 pc__category text-decoration-line-through">${{ floor($item->gia) }}</span>
-                                                        <span class="money price text-red">${{ floor($item->gia_giam) }}</span>
+                                                        <span class="price me-1 pc__category text-decoration-line-through">{{ number_format($item->gia, 0, ',', '.') }}đ</span>
+                                                        <span class="money price text-red">{{ number_format($item->gia_giam, 0, ',', '.') }}đ</span>
                                                     @else
-                                                        <span class="money price text-red">${{ floor($item->gia) }}</span>
+                                                        <span class="money price text-red">{{ number_format($item->gia, 0, ',', '.') }}đ</span>
                                                     @endif
                                                 </div>
                                                 <div class="mt-3">

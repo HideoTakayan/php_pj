@@ -16,7 +16,12 @@ class ShopController extends Controller
     {
         $query = SanPham::query();
 
-        // lọc theo danh mục
+        // Tìm kiếm theo từ khóa
+        if ($request->has('q')) {
+            $keyword = $request->input('q');
+            $query->where('ten', 'like', "%{$keyword}%");
+        }
+
         // lọc theo danh mục
         if ($request->has('danh_muc_id')) {
             $query->where('danh_muc_id', $request->input('danh_muc_id'));
@@ -33,6 +38,10 @@ class ShopController extends Controller
                     $q->where('slug', 'like', '%phu-kien%');
                 }
             });
+        }
+
+        if ($request->has('min_price') && $request->has('max_price')) {
+            $query->whereBetween('gia', [$request->min_price, $request->max_price]);
         }
 
         $danhMucs = DanhMuc::all();

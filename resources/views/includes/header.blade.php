@@ -265,17 +265,16 @@
     <nav
         class="header-mobile__navigation navigation d-flex flex-column w-100 position-absolute top-100 bg-body overflow-auto">
         <div class="container">
-            <form action="#" method="GET" class="search-field position-relative mt-4 mb-3">
+            <form action="{{ route('shop.index') }}" method="GET" class="search-field position-relative mt-4 mb-3">
                 <div class="position-relative">
-                    <input class="search-field__input w-100 border rounded-1" type="text" name="search-keyword"
-                        placeholder="Tìm kiếm sản phẩm" />
+                    <input class="search-field__input w-100 border rounded-1" type="search" name="q" value="{{ request('q') }}"
+                        placeholder="Tìm kiếm sản phẩm..." />
                     <button class="btn-icon search-popup__submit pb-0 me-2" type="submit">
                         <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <use href="#icon_search" />
                         </svg>
                     </button>
-                    <button class="btn-icon btn-close-lg search-popup__reset pb-0 me-2" type="reset"></button>
                 </div>
 
                 <div class="position-absolute start-0 top-100 m-0 w-100">
@@ -407,18 +406,23 @@
                     </div>
 
                     <div class="search-popup js-hidden-content">
-                        <form action="#" method="GET" class="search-field container">
+                        <form action="{{ route('shop.index') }}" method="GET" class="search-field container">
                             <p class="text-uppercase text-secondary fw-medium mb-4">Bạn đang tìm gì?</p>
                             <div class="position-relative">
-                                <input class="search-field__input search-popup__input w-100 fw-medium" type="text"
-                                    name="search-keyword" placeholder="Tìm kiếm sản phẩm" />
+                                <input class="search-field__input search-popup__input w-100 fw-medium" type="search" name="q" value="{{ request('q') }}"
+                                    placeholder="Tìm kiếm sản phẩm..." />
                                 <button class="btn-icon search-popup__submit" type="submit">
                                     <svg class="d-block" width="20" height="20" viewBox="0 0 20 20"
                                         fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <use href="#icon_search" />
                                     </svg>
                                 </button>
-                                <button class="btn-icon btn-close-lg search-popup__reset" type="reset"></button>
+                                <button class="btn-icon btn-close-lg search-popup__reset pb-0 me-2" type="button">
+                                    <svg class="d-block" width="10" height="10" viewBox="0 0 10 10" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#icon_close" />
+                                    </svg>
+                                </button>
                             </div>
 
                             <div class="search-popup__results">

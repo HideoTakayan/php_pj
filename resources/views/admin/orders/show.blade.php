@@ -73,19 +73,19 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ number_format($detail->don_gia) }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ number_format($detail->don_gia, 0, ',', '.') }}đ</p>
                                         </td>
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-xs font-weight-bold">{{ $detail->so_luong }}</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ number_format($detail->thanh_tien) }}</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ number_format($detail->thanh_tien, 0, ',', '.') }}đ</span>
                                         </td>
                                     </tr>
                                 @endforeach
                                 <tr>
                                     <td colspan="3" class="text-end font-weight-bold">Tổng tiền (bao gồm ship):</td>
-                                    <td class="text-center font-weight-bold">{{ number_format($donHang->tong_tien) }}</td>
+                                    <td class="text-center font-weight-bold text-red">{{ number_format($donHang->tong_tien, 0, ',', '.') }}đ</td>
                                 </tr>
                             </tbody>
                         </table>

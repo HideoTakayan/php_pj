@@ -38,7 +38,7 @@
                                             <p class="text-xs text-secondary mb-0">{{ $item->sdt_nguoi_nhan }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <span class="text-success font-weight-bold">{{ number_format($item->tong_tien) }}</span>
+                                            <span class="text-success font-weight-bold">{{ number_format($item->tong_tien, 0, ',', '.') }}đ</span>
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <span class="badge badge-sm {{ $item->phuong_thuc_thanh_toan == 'Banking' ? 'bg-gradient-info' : 'bg-gradient-secondary' }}">{{ $item->phuong_thuc_thanh_toan ?? 'COD' }}</span>

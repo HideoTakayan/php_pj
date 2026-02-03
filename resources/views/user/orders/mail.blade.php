@@ -9,10 +9,10 @@
 
     *** Sản phẩm đã đặt ***
     @foreach ($donHang->chiTietDonHang as $chiTiet)
-        {{ $chiTiet->sanPham->ten }} x {{ $chiTiet->so_luong }}: ${{ number_format($chiTiet->thanh_tien) }}
+        {{ $chiTiet->sanPham->ten }} x {{ $chiTiet->so_luong }}: {{ number_format($chiTiet->thanh_tien, 0, ',', '.') }}đ
     @endforeach
 
-    *** Tổng tiền: *** ${{ number_format($donHang->tong_tien) }}
+    *** Tổng tiền: *** {{ number_format($donHang->tong_tien, 0, ',', '.') }}đ
 
     Cảm ơn bạn đã mua hàng ^_^
 
