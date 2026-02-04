@@ -10,41 +10,40 @@ use App\Models\DanhMuc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Controller quản lý sản phẩm (Admin)
+ * CRUD: Create, Read, Update, Delete
+ * Xử lý upload nhiều ảnh (gallery)
+ */
 class SanPhamController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Danh sách sản phẩm (có tìm kiếm, phân trang, eager loading)
     public function index(Request $request)
     {
         $search = $request->input('search');
         $sanPhams = SanPham::query()
-            ->with('danh_muc')
+            ->with('danh_muc') // Eager loading để tránh N+1 query
             ->when($search, function ($query, $search) {
                 return $query->where('ten', 'like', "%{$search}%");
             })
             ->latest('id')->paginate(5);
 
-
         return view('admin.san_phams.index', compact('sanPhams', 'search'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Form tạo sản phẩm mới
     public function create()
     {
         $danhMucs = DanhMuc::all();
         return view('admin.san_phams.create', compact('danhMucs'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Lưu sản phẩm mới (upload nhiều ảnh)
     public function store(StoreSanPhamRequest $request)
     {
         $data = $request->except('hinh_anh_chi_tiet');
 
+        // Upload nhiều ảnh (gallery)
         if ($request->hasFile('hinh_anh_chi_tiet')) {
             $galleryImages = [];
 
@@ -53,7 +52,7 @@ class SanPhamController extends Controller
                 $galleryImages[] = $imageName;
             }
             
-            // Lưu tất cả ảnh vào gallery
+            // Lưu dạng string phân cách bằng dấu phẩy
             $data['hinh_anh_chi_tiet'] = implode(',', $galleryImages);
         }
 
@@ -62,28 +61,20 @@ class SanPhamController extends Controller
         return redirect()->route('san_phams.index')->with('success', 'Tạo sản phẩm thành công.');
     }
 
-
-    /**
-     * Display the specified resource.
-     */
+    // Xem chi tiết sản phẩm
     public function show(SanPham $sanPham)
     {
-        // $sanPham->with('danh_muc');
         return view('admin.san_phams.show', compact('sanPham'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Form sửa sản phẩm
     public function edit(SanPham $sanPham)
     {
         $danhMucs = DanhMuc::all();
         return view('admin.san_phams.edit', compact('sanPham', 'danhMucs'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Cập nhật sản phẩm (xóa ảnh cũ, upload ảnh mới)
     public function update(UpdateSanPhamRequest $request, SanPham $sanPham)
     {
         $data = $request->except('hinh_anh_chi_tiet');
@@ -111,11 +102,10 @@ class SanPhamController extends Controller
         return back()->with('success', 'Cập nhật sản phẩm thành công.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Xóa sản phẩm (xóa cả ảnh trong storage)
     public function destroy(SanPham $sanPham)
     {
+        // Xóa tất cả ảnh trong gallery
         if (!empty($sanPham->hinh_anh_chi_tiet)) {
             $galleryImages = explode(',', $sanPham->hinh_anh_chi_tiet);
 

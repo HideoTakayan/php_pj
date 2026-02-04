@@ -5,18 +5,25 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/**
+ * Controller quản lý tài khoản user
+ * Xem profile, cập nhật thông tin, đổi mật khẩu, upload avatar
+ */
 class UserController extends Controller
 {
+    // Trang dashboard user
     public function index(){
         $user = auth()->user();
         return view('user.index', compact('user'));
     }
 
+    // Trang thông tin tài khoản
     public function profile() {
         $user = auth()->user();
         return view('user.account-details', compact('user'));
     }
 
+    // Cập nhật thông tin tài khoản (tên, mật khẩu, avatar)
     public function updateProfile(Request $request) {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -28,6 +35,7 @@ class UserController extends Controller
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
+        // Đổi mật khẩu (kiểm tra mật khẩu cũ)
         if ($request->old_password) {
             if (!\Illuminate\Support\Facades\Hash::check($request->old_password, $user->password)) {
                 return back()->withErrors(['old_password' => 'Mật khẩu cũ không đúng']);
@@ -37,8 +45,8 @@ class UserController extends Controller
 
         $user->name = $request->name;
 
+        // Upload avatar mới (xóa avatar cũ)
         if ($request->hasFile('avatar')) {
-             // Delete old avatar if exists and not default
              if ($user->avatar && file_exists(public_path('uploads/users/' . $user->avatar))) {
                 unlink(public_path('uploads/users/' . $user->avatar));
             }

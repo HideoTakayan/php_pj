@@ -5,65 +5,50 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/**
+ * Controller quản lý user (Admin)
+ * Xem danh sách, xóa user (không cho xóa chính mình)
+ */
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Danh sách user
     public function index()
     {
         $users = \App\Models\User::latest()->paginate(10);
         return view('admin.users.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Xóa user (không cho admin tự xóa chính mình)
     public function destroy(string $id)
     {
         $user = \App\Models\User::findOrFail($id);
         
-        // Prevent admin from deleting themselves
+        // Ngăn admin tự xóa chính mình
         if ($user->id === auth()->id()) {
             return back()->with('error', 'Bạn không thể tự xóa tài khoản của chính mình.');
         }

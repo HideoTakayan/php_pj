@@ -4,20 +4,22 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Validation cho bài viết
+ * Validate: tên, slug, nội dung, ảnh bìa, trạng thái
+ */
 class BaiVietRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * Rules validation:
+     * - Slug: unique (không trùng)
+     * - Ảnh bìa: bắt buộc, image, max 2MB
+     * - is_published, is_commented: nullable boolean
      */
     public function rules(): array
     {

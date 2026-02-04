@@ -6,17 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\DonHang;
 use Illuminate\Http\Request;
 
+/**
+ * Controller quản lý đơn hàng (Admin)
+ * Xem danh sách, cập nhật trạng thái đơn hàng và thanh toán
+ */
 class DonHangController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Danh sách đơn hàng (sắp xếp mới nhất, phân trang)
     public function index()
     {
         $donHangs = DonHang::query()->orderByDesc('id')->paginate(10);
         return view('admin.orders.index', compact('donHangs'));
     }
 
+    // Tìm kiếm đơn hàng (theo ID, mã đơn, số điện thoại)
     public function track(Request $request)
     {
         $donHang = null;
@@ -32,18 +35,14 @@ class DonHangController extends Controller
         return view('admin.orders.track', compact('donHang'));
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // Xem chi tiết đơn hàng (Eager Loading)
     public function show(string $id)
     {
         $donHang = DonHang::with('chiTietDonHang.sanPham')->findOrFail($id);
         return view('admin.orders.show', compact('donHang'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Cập nhật trạng thái đơn hàng và thanh toán
     public function update(Request $request, string $id)
     {
         $donHang = DonHang::findOrFail($id);

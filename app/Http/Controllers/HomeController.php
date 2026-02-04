@@ -6,47 +6,44 @@ use App\Models\DanhMuc;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
 
+/**
+ * Controller trang chủ
+ * Hiển thị slider, sản phẩm nổi bật, khuyến mãi
+ * Xử lý form liên hệ
+ */
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+    // Trang chủ: slider, sản phẩm nổi bật, khuyến mãi hot
     public function index()
     {
         $sliders = \App\Models\Slider::where('status', 1)->limit(3)->get();
         $danhmucs = DanhMuc::all();
-        // Sản phẩm nổi bật: những sản phẩm được tích "hot" trong admin
+        
+        // Sản phẩm nổi bật: sản phẩm được tích "hot"
         $featuredProducts = SanPham::query()->where('hot', 1)->take(8)->get();
-        // Khuyến mãi hot: những sản phẩm có giá giảm
+        
+        // Khuyến mãi hot: sản phẩm có giá giảm
         $hotDeals = SanPham::query()->whereNotNull('gia_giam')->take(8)->get();
-        // Banner khuyến mãi (lấy 2 sản phẩm đang giảm giá)
+        
+        // Banner khuyến mãi (2 sản phẩm đang giảm giá)
         $promoBanners = SanPham::query()->whereNotNull('gia_giam')->paginate(2);
         
         return view('includes.home', compact('sliders', 'danhmucs', 'featuredProducts', 'hotDeals', 'promoBanners'));
     }
 
+    // Trang giới thiệu
     public function about()
     {
         return view('client.about');
     }
 
+    // Trang liên hệ
     public function contact()
     {
         return view('client.contact');
     }
 
+    // Xử lý form liên hệ (validation, lưu vào database)
     public function postContact(Request $request)
     {
         $request->validate([

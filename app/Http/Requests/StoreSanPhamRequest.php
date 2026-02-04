@@ -4,20 +4,23 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Validation cho tạo sản phẩm mới
+ * Validate tất cả fields: tên, slug, mã SP, giá, ảnh, số lượng, danh mục
+ */
 class StoreSanPhamRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * Rules validation:
+     * - Slug & Mã SP: unique (không trùng)
+     * - Giá giảm: nullable (có thể không có)
+     * - Ảnh chi tiết: bắt buộc, array, mỗi ảnh max 2MB
+     * - Danh mục: exists (phải tồn tại trong bảng danh_mucs)
      */
     public function rules(): array
     {
@@ -32,7 +35,7 @@ class StoreSanPhamRequest extends FormRequest
             'tinh_trang' => 'required|string',
             'hot' => 'nullable|boolean',
             'hinh_anh_chi_tiet' => 'required|array',
-            'hinh_anh_chi_tiet.*' => 'image|max:2048',
+            'hinh_anh_chi_tiet.*' => 'image|max:2048', // Mỗi ảnh max 2MB
             'so_luong' => 'required|integer',
             'danh_muc_id' => 'required|exists:danh_mucs,id',
         ];

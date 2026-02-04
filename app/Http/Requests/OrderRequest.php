@@ -4,20 +4,23 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Validation cho đơn hàng (Checkout)
+ * Validate thông tin người nhận: tên, email, SĐT, địa chỉ
+ */
 class OrderRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * Rules validation:
+     * - Tên: bắt buộc, max 255 ký tự
+     * - Email: bắt buộc, định dạng email
+     * - SĐT: bắt buộc, max 15 ký tự, regex cho phép số, dấu cách, +, -, (, )
+     * - Địa chỉ: bắt buộc, max 255 ký tự
      */
     public function rules(): array
     {
@@ -29,6 +32,7 @@ class OrderRequest extends FormRequest
         ];
     }
 
+    // Custom messages tiếng Việt
     public function messages()
     {
         return [

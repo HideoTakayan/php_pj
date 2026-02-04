@@ -7,12 +7,19 @@ use Illuminate\Http\Request;
 
 use App\Models\DonHang;
 
+/**
+ * Controller Dashboard Admin
+ * Thống kê doanh thu, đơn hàng, biểu đồ theo tháng
+ * Cập nhật profile admin
+ */
 class AdminController extends Controller
 {
+    // Dashboard admin: thống kê tổng quan, biểu đồ
     public function index(){
         $totalOrders = DonHang::count();
         $totalRevenue = DonHang::sum('tong_tien');
 
+        // Thống kê theo trạng thái
         $pendingOrders = DonHang::where('trang_thai_don_hang', DonHang::CHO_XAC_NHAN)->count();
         $pendingRevenue = DonHang::where('trang_thai_don_hang', DonHang::CHO_XAC_NHAN)->sum('tong_tien');
 
@@ -24,7 +31,7 @@ class AdminController extends Controller
 
         $recentOrders = DonHang::latest()->take(5)->get();
 
-        // Monthly data for chart
+        // Dữ liệu biểu đồ theo tháng (năm hiện tại)
         $monthlyData = DonHang::selectRaw('MONTH(created_at) as month, SUM(tong_tien) as revenue, COUNT(*) as orders,
             SUM(CASE WHEN trang_thai_don_hang = "cho_xac_nhan" THEN tong_tien ELSE 0 END) as pending,
             SUM(CASE WHEN trang_thai_don_hang = "da_giao_hang" THEN tong_tien ELSE 0 END) as delivered,
@@ -40,6 +47,7 @@ class AdminController extends Controller
         $monthlyDeliveredArr = [];
         $monthlyCancelledArr = [];
 
+        // Tạo mảng 12 tháng (điền 0 nếu tháng không có dữ liệu)
         for ($i = 1; $i <= 12; $i++) {
             $monthlyRevenue[] = $monthlyData->has($i) ? $monthlyData[$i]->revenue : 0;
             $monthlyOrders[] = $monthlyData->has($i) ? $monthlyData[$i]->orders : 0;
@@ -48,7 +56,7 @@ class AdminController extends Controller
             $monthlyCancelledArr[] = $monthlyData->has($i) ? $monthlyData[$i]->cancelled : 0;
         }
 
-        // Rolling 30-day stats for growth
+        // Tính tăng trưởng 30 ngày (so với 30 ngày trước)
         $now = now();
         $startOfLast30Days = $now->copy()->subDays(30);
         $startOfPrev30Days = $now->copy()->subDays(60);
@@ -80,10 +88,12 @@ class AdminController extends Controller
         ));
     }
 
+    // Trang profile admin
     public function profile() {
         return view('admin.profile');
     }
 
+    // Cập nhật profile admin (tên, mật khẩu, avatar)
     public function updateProfile(Request $request) {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -94,6 +104,7 @@ class AdminController extends Controller
 
         $user = \Illuminate\Support\Facades\Auth::user();
 
+        // Đổi mật khẩu (kiểm tra mật khẩu cũ)
         if ($request->old_password) {
             if (!\Illuminate\Support\Facades\Hash::check($request->old_password, $user->password)) {
                 return back()->withErrors(['old_password' => 'Mật khẩu cũ không đúng']);
@@ -103,8 +114,8 @@ class AdminController extends Controller
 
         $user->name = $request->name;
 
+        // Upload avatar mới (xóa avatar cũ)
         if ($request->hasFile('avatar')) {
-            // Delete old avatar if exists and not default
             if ($user->avatar && file_exists(public_path('uploads/users/' . $user->avatar))) {
                 unlink(public_path('uploads/users/' . $user->avatar));
             }

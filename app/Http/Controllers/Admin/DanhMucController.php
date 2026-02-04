@@ -11,11 +11,13 @@ use Illuminate\Support\Facades\Storage;
 
 // use Illuminate\Support\Facades\Request;
 
+/**
+ * Controller quản lý danh mục (Admin)
+ * CRUD danh mục, upload ảnh
+ */
 class DanhMucController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Danh sách danh mục (có tìm kiếm, phân trang)
     public function index(Request $request)
     {
         $search = $request->input('search');
@@ -28,9 +30,7 @@ class DanhMucController extends Controller
         return view('admin.danh_mucs.index', compact('danhMucs', 'search'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Form tạo danh mục mới
     public function create()
     {
         // $parentCategories = DanhMuc::whereNull('danh_muc_cha_id')->get();
@@ -38,9 +38,7 @@ class DanhMucController extends Controller
         return view('admin.danh_mucs.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Lưu danh mục mới (upload ảnh)
     public function store(StoreDanhMucRequest $request)
     {
         $data = $request->except('hinh_anh');
@@ -54,25 +52,19 @@ class DanhMucController extends Controller
         return redirect()->route('danh_mucs.index')->with('success', 'Danh mục đã được tạo thành công!');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // Xem chi tiết danh mục
     public function show(DanhMuc $danhMuc)
     {
         return view('admin.danh_mucs.edit', compact('danhMuc'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Form sửa danh mục
     public function edit(DanhMuc $danhMuc)
     {
         return view('admin.danh_mucs.edit', compact('danhMuc'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Cập nhật danh mục (xóa ảnh cũ nếu upload ảnh mới)
     public function update(UpdateDanhMucRequest $request, DanhMuc $danhMuc)
     {
         $data = $request->except('hinh_anh');
@@ -93,9 +85,7 @@ class DanhMucController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Xóa danh mục (xóa cả ảnh trong storage)
     public function destroy(DanhMuc $danhMuc)
     {
         if (Storage::disk('public')->exists($danhMuc->hinh_anh)) {

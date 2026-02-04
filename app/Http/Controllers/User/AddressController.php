@@ -7,11 +7,13 @@ use App\Http\Requests\DiaChiRequest;
 use App\Models\DiaChi;
 use Illuminate\Http\Request;
 
+/**
+ * Controller quản lý địa chỉ user
+ * CRUD địa chỉ giao hàng
+ */
 class AddressController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Danh sách địa chỉ của user
     public function index()
     {
         $user = auth()->user()->id;
@@ -19,50 +21,37 @@ class AddressController extends Controller
         return view('user.address.index', compact('diaChis'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Form thêm địa chỉ mới
     public function create()
     {
         return view('user.address.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Lưu địa chỉ mới
     public function store(DiaChiRequest $request)
     {
         $data = $request->except('_token');
         $userId = auth()->user()->id;
         $data['user_id'] = $userId;
 
-
-
         DiaChi::create($data);
 
         return redirect()->route('address.index')->with('success', 'Thêm mới địa chỉ thành công!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Form sửa địa chỉ
     public function edit(string $id)
     {
         $diaChi = DiaChi::findOrFail($id);
         return view('user.address.edit', compact('diaChi'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Cập nhật địa chỉ
     public function update(DiaChiRequest $request, string $id)
     {
         $data = $request->except('_token');
@@ -74,9 +63,7 @@ class AddressController extends Controller
         return redirect()->route('address.index')->with('success', 'Cập nhật địa chỉ thành công');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Xóa địa chỉ
     public function destroy(string $id)
     {
         $diaChi = DiaChi::findOrFail($id);

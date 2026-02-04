@@ -8,28 +8,26 @@ use Illuminate\Http\Request;
 use App\Models\Slider;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Controller quản lý slider (Admin)
+ * CRUD slider trang chủ, upload ảnh, validation
+ */
 class SliderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Danh sách slider
     public function index()
     {
         $sliders = Slider::latest()->paginate(10);
         return view('admin.sliders.index', compact('sliders'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Form tạo slider mới
     public function create()
     {
         return view('admin.sliders.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Lưu slider mới (validation, upload ảnh)
     public function store(Request $request)
     {
         $request->validate([
@@ -51,25 +49,19 @@ class SliderController extends Controller
                         ->with('success', 'Thêm Slider thành công.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // Xem chi tiết slider
     public function show(Slider $slider)
     {
         return view('admin.sliders.show', compact('slider'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Form sửa slider
     public function edit(Slider $slider)
     {
         return view('admin.sliders.edit', compact('slider'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Cập nhật slider (xóa ảnh cũ, upload ảnh mới)
     public function update(Request $request, Slider $slider)
     {
         $request->validate([
@@ -93,9 +85,7 @@ class SliderController extends Controller
                         ->with('success', 'Cập nhật Slider thành công');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Xóa slider (xóa cả ảnh trong storage)
     public function destroy(Slider $slider)
     {
         if (Storage::disk('public')->exists($slider->image)) {
